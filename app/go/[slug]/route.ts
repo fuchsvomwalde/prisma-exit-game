@@ -2,8 +2,6 @@ import { getGame, getLinkBySlug } from "@/app/api/game/actions";
 import { Game } from "@/app/api/game/model";
 import { NextResponse } from "next/server";
 
-export const SUBMISSION_KEY = "passcode";
-
 export async function GET(
   request: Request,
   { params }: { params: { slug: string } }
