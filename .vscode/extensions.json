@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "figma.figma-vscode-extension",
+    "esbenp.prettier-vscode",
+    "github.vscode-github-actions",
+    "bradlc.vscode-tailwindcss",
+    "eamodio.gitlens"
+  ]
+}
