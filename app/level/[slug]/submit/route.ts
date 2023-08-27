@@ -1,15 +1,17 @@
 import { getLevelByNextSlug, getLevelBySlug } from "@/app/api/game/actions";
-import { COOKIE_KEY, NO_LEVEL } from "@/app/api/game/constants";
+import {
+  COOKIE_KEY,
+  FORM_DATA_SUBMISSION_KEY,
+  NO_LEVEL,
+} from "@/app/api/game/constants";
 import { NextResponse } from "next/server";
-
-export const SUBMISSION_KEY = "passcode";
 
 export async function GET(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
   const { searchParams } = new URL(request.url);
-  const submissionValue = searchParams.get(SUBMISSION_KEY);
+  const submissionValue = searchParams.get(FORM_DATA_SUBMISSION_KEY);
 
   const currentLevel = await getLevelBySlug(params.slug);
 

@@ -1,10 +1,10 @@
 import { getGame, getLevelBySlug } from "@/app/api/game/actions";
+import { FORM_DATA_SUBMISSION_KEY } from "@/app/api/game/constants";
 import { Game } from "@/app/api/game/model";
 import AnimatedType from "@/components/AnimatedType";
 import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
 import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
-import { SUBMISSION_KEY } from "./submit/route";
 
 export default async function PageLevel({
   params,
@@ -51,7 +51,7 @@ export default async function PageLevel({
               id="password"
               className="mb-4 bg-gray-50 w-full border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder=""
-              name={SUBMISSION_KEY}
+              name={FORM_DATA_SUBMISSION_KEY}
               required
             />
             <button
