@@ -4,7 +4,6 @@ import AnimatedType from "@/components/AnimatedType";
 import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
 import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
-import { NextRequest } from "next/server";
 import { SUBMISSION_KEY } from "./submit/route";
 
 export default async function PageLevel({
@@ -68,7 +67,7 @@ export default async function PageLevel({
   );
 }
 
-export async function generateStaticParams(request: NextRequest) {
+export async function generateStaticParams() {
   const game: Game = await getGame();
 
   return game.levels.map((level) => ({

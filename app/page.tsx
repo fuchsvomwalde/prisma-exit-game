@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import { getFirstLevel, getLevelBySlug } from "./api/game/actions";
 import { COOKIE_KEY, NO_LEVEL } from "./api/game/constants";
+import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
 
 export default async function Home() {
   const cookieStore = cookies();
@@ -12,8 +13,13 @@ export default async function Home() {
   const passedLevel = await getLevelBySlug(passedLevelSlug);
   const firstLevel = await getFirstLevel();
 
+  const title = textToAsciArt("You win");
+  const blankLine = getBlankLineByTitle(title);
+  const terminalVariant =
+    passedAnyLevel && passedLevel?.finalLevel ? "success" : "default";
+
   return (
-    <Terminal>
+    <Terminal variant={terminalVariant}>
       <main className="flex min-h-screen flex-col items-center justify-between p-8 lg:p-24">
         <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
           <p className="whitespace-nowrap p-4 left-0 top-0 flex w-full justify-center dark:border-neutral-800 lg:static lg:w-auto lg:rounded-xl">
@@ -51,6 +57,13 @@ export default async function Home() {
             priority
           />
         </div>
+
+        {passedAnyLevel && passedLevel?.finalLevel && (
+          <div className="mb-8 text-xs transform scale-75 lg:w-full lg:scale-100">
+            <div className="font-mono whitespace-pre-line">{title}</div>
+            <div className="font-mono whitespace-nowrap">{blankLine}</div>
+          </div>
+        )}
 
         <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
           {!passedAnyLevel && (

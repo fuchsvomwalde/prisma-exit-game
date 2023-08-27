@@ -18,7 +18,7 @@ export async function GET(
       new URL(`/level/${params.slug}/result`, request.url)
     );
 
-    // here we write a http-only cookie :D
+    // here we write a http-only cookie :D`
     response.cookies.set(COOKIE_KEY, params.slug, {
       httpOnly: true,
       sameSite: "lax",
