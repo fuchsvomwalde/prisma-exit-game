@@ -1,5 +1,7 @@
 import NavTile from "@/components/NavTile";
+import SendMessage from "@/components/SendMessage";
 import Terminal from "@/components/Terminal";
+import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import {
@@ -7,9 +9,8 @@ import {
   getFirstLevel,
   getLevelBySlug,
 } from "../api/game/actions";
-import { Game } from "../api/game/model";
 import { NO_LEVEL } from "../api/game/constants";
-import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
+import { Game } from "../api/game/model";
 
 export default async function Game({
   params,
@@ -66,6 +67,9 @@ export default async function Game({
             priority
           />
         </div>
+
+        {/* TODO: here we can test SMS services */}
+        {/* <SendMessage /> */}
 
         {passedAnyLevel && passedLevel?.finalLevel && (
           <div className="mb-8 text-xs transform scale-75 lg:w-full lg:scale-100">
