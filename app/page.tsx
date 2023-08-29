@@ -1,31 +1,19 @@
 import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
-import { cookies } from "next/headers";
 import Image from "next/image";
-import { getFirstLevel, getLevelBySlug } from "./api/game/actions";
-import { COOKIE_KEY, NO_LEVEL } from "./api/game/constants";
-import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
+import { getAllGames } from "./api/game/actions";
+import { Game } from "./api/game/model";
 
 export default async function Home() {
-  const cookieStore = cookies();
-  const passedLevelSlug = cookieStore.get(COOKIE_KEY)?.value ?? "";
-  const passedAnyLevel = passedLevelSlug && passedLevelSlug !== NO_LEVEL;
-  const passedLevel = await getLevelBySlug(passedLevelSlug);
-  const firstLevel = await getFirstLevel();
-
-  const title = textToAsciArt("You win");
-  const blankLine = getBlankLineByTitle(title);
-  const terminalVariant =
-    passedAnyLevel && passedLevel?.finalLevel ? "success" : "default";
+  const games: Array<Game> = await getAllGames();
 
   return (
-    <Terminal variant={terminalVariant}>
+    <Terminal>
       <main className="flex min-h-screen flex-col items-center justify-between p-8 lg:p-24">
         <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
           <p className="whitespace-nowrap p-4 left-0 top-0 flex w-full justify-center dark:border-neutral-800 lg:static lg:w-auto lg:rounded-xl">
             Welcome to&nbsp;
-            <code className="font-mono font-bold">Prisma</code>&nbsp;the exit
-            game.
+            <code className="font-mono font-bold">Prisma Games</code>.
           </p>
           <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center lg:static lg:h-auto lg:w-auto lg:bg-none">
             <a
@@ -58,40 +46,14 @@ export default async function Home() {
           />
         </div>
 
-        {passedAnyLevel && passedLevel?.finalLevel && (
-          <div className="mb-8 text-xs transform scale-75 lg:w-full lg:scale-100">
-            <div className="font-mono whitespace-pre-line">{title}</div>
-            <div className="font-mono whitespace-nowrap">{blankLine}</div>
-          </div>
-        )}
-
         <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-          {!passedAnyLevel && (
+          {games.map((game) => (
             <NavTile
-              href={`/level/${firstLevel?.slug}`}
-              title="Start game"
-              subline="Start game as soon as you are ready."
+              href={`/${game.slug}`}
+              title={game.name}
+              subline={game.description}
             />
-          )}
-          {passedAnyLevel && passedLevel?.next_slug && (
-            <NavTile
-              href={`/level/${passedLevel?.next_slug}`}
-              title="Continue"
-              subline="Continue where you left."
-            />
-          )}
-          {passedAnyLevel && (
-            <NavTile
-              href={`/api/game/reset`}
-              title="Reset game"
-              subline="Start from the beginning."
-            />
-          )}
-          <NavTile
-            href="/instructions"
-            title="Game rules"
-            subline="Read the rules of the game here."
-          />
+          ))}
         </div>
       </main>
     </Terminal>

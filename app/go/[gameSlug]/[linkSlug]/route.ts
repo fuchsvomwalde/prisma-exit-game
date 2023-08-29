@@ -1,12 +1,12 @@
-import { getGame, getLinkBySlug } from "@/app/api/game/actions";
+import { getAllGames, getLinkBySlug } from "@/app/api/game/actions";
 import { Game } from "@/app/api/game/model";
 import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { gameSlug: string; linkSlug: string } }
 ) {
-  const currentLink = await getLinkBySlug(params.slug);
+  const currentLink = await getLinkBySlug(params.gameSlug, params.linkSlug);
 
   try {
     return NextResponse.redirect(
@@ -23,9 +23,14 @@ export async function GET(
 }
 
 export async function generateStaticParams() {
-  const game: Game = await getGame();
+  const games: Array<Game> = await getAllGames();
 
-  return game.links.map((link) => ({
-    slug: link.slug,
-  }));
+  return games
+    .map((game) =>
+      game.links.map((link) => ({
+        gameSlug: game.slug,
+        linkSlug: link.slug,
+      }))
+    )
+    .flat();
 }

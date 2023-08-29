@@ -3,7 +3,11 @@ import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
 import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
 
-export default function Code() {
+export default function GameInstructions({
+  params,
+}: {
+  params: { gameSlug: string };
+}) {
   const title = textToAsciArt("Rules");
   const blankLine = getBlankLineByTitle(title);
 
@@ -11,7 +15,12 @@ export default function Code() {
     <Terminal>
       <main className="flex min-h-screen flex-col items-center justify-start p-8 lg:p-24">
         <div className="mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
-          <NavTile href="/" title="Back" subline="Go back to home." back />
+          <NavTile
+            href={`/${params.gameSlug}`}
+            title="Back"
+            subline="Go back to home."
+            back
+          />
         </div>
 
         <div className="mb-8 text-xs transform scale-75 lg:w-full lg:scale-100">

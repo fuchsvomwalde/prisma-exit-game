@@ -1,20 +1,19 @@
 import { getLevelBySlug } from "@/app/api/game/actions";
-import { COOKIE_KEY } from "@/app/api/game/constants";
 import AnimatedType from "@/components/AnimatedType";
 import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
 import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
 import { cookies } from "next/headers";
 
-export default async function PageLevelSubmit({
+export default async function GameLevelResult({
   params,
 }: {
-  params: { slug: string };
+  params: { gameSlug: string; levelSlug: string };
 }) {
-  const level = await getLevelBySlug(params.slug);
+  const level = await getLevelBySlug(params.gameSlug, params.levelSlug);
 
   const cookieStore = cookies();
-  const passedLevel = cookieStore.get(COOKIE_KEY)?.value ?? "";
+  const passedLevel = cookieStore.get(params.gameSlug)?.value ?? "";
 
   const passed = passedLevel === level?.slug;
 
@@ -28,7 +27,12 @@ export default async function PageLevelSubmit({
     <Terminal variant={terminalVariant}>
       <main className="flex min-h-screen flex-col items-center justify-start p-8 lg:p-24">
         <div className="mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
-          <NavTile href="/" title="Back" subline="Go back to home." back />
+          <NavTile
+            href={`/${params.gameSlug}`}
+            title="Back"
+            subline="Go back to home."
+            back
+          />
         </div>
 
         <div className="mb-8 text-xs transform scale-75 lg:w-full lg:scale-100">
@@ -43,7 +47,7 @@ export default async function PageLevelSubmit({
         <div className="mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
           {!passed && (
             <NavTile
-              href={`/level/${params.slug}`}
+              href={`/${params.gameSlug}/level/${params.levelSlug}`}
               title="Retry"
               subline="Back to reenter solution."
               back
@@ -52,7 +56,7 @@ export default async function PageLevelSubmit({
           )}
           {passed && level?.next_slug && (
             <NavTile
-              href={`/level/${level?.next_slug}`}
+              href={`/${params.gameSlug}/level/${level?.next_slug}`}
               title="Next level"
               subline="Move on to the next level."
             />

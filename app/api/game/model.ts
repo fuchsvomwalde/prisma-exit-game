@@ -17,11 +17,17 @@ export interface Link {
 }
 
 export interface Game {
+  slug: string;
+  name: string;
+  description: string;
   levels: Array<Level>;
   links: Array<Link>;
 }
 
 export const prisma_classic = {
+  slug: "classic",
+  name: "Classic",
+  description: "First exit game from prisma games.",
   links: [
     {
       slug: "sfg3",

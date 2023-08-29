@@ -6,12 +6,12 @@ import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
 import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
 
-export default async function PageLevel({
+export default async function GameLevel({
   params,
 }: {
-  params: { slug: string };
+  params: { gameSlug: string; levelSlug: string };
 }) {
-  const level = await getLevelBySlug(params.slug);
+  const level = await getLevelBySlug(params.gameSlug, params.levelSlug);
 
   // TODO: replace title
   const title = textToAsciArt(level?.title ?? "");
@@ -21,7 +21,12 @@ export default async function PageLevel({
     <Terminal>
       <main className="flex min-h-screen flex-col items-center justify-start p-8 lg:p-24">
         <div className="mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
-          <NavTile href="/" title="Back" subline="Go back to home." back />
+          <NavTile
+            href={`/${params.gameSlug}`}
+            title="Back"
+            subline="Go back to home."
+            back
+          />
         </div>
 
         <div className="mb-8 text-xs transform scale-75 lg:w-full lg:scale-100">
@@ -35,7 +40,7 @@ export default async function PageLevel({
 
         <div className="z-10 w-full items-center justify-between font-mono lg:flex">
           <form
-            action={`/level/${params.slug}/submit`}
+            action={`/${params.gameSlug}/level/${params.levelSlug}/submit`}
             method="get"
             autoComplete="off"
           >
@@ -67,10 +72,14 @@ export default async function PageLevel({
   );
 }
 
-export async function generateStaticParams() {
-  const game: Game = await getGame();
+export async function generateStaticParams({
+  params,
+}: {
+  params: { gameSlug: string; levelSlug: string };
+}) {
+  const game: Game = await getGame(params.gameSlug);
 
   return game.levels.map((level) => ({
-    slug: level.slug,
+    levelSlug: level.slug,
   }));
 }
