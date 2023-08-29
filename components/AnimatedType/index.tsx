@@ -20,7 +20,11 @@ export default function AnimatedType({
         cursor={false}
         repeat={0}
         speed={speed}
-        style={{ whiteSpace: "pre-line", display: "block" }}
+        style={{
+          whiteSpace: "pre-line",
+          display: "block",
+          fontFamily: "monospace",
+        }}
         className={styles.type}
       />
     </div>

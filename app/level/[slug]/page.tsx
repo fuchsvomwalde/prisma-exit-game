@@ -20,7 +20,7 @@ export default async function PageLevel({
   return (
     <Terminal>
       <main className="flex min-h-screen flex-col items-center justify-start p-8 lg:p-24">
-        <div className="mb-8 grid text-center w-full lg:max-w-5xl lg:w-full lg:grid-cols-4 lg:text-left">
+        <div className="mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
           <NavTile href="/" title="Back" subline="Go back to home." back />
         </div>
 

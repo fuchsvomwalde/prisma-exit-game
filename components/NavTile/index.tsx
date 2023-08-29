@@ -36,7 +36,7 @@ export default function NavTile({
           </span>
         )}
       </h2>
-      <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>{subline}</p>
+      <p className={`m-0 mx-auto max-w-[30ch] text-sm opacity-50`}>{subline}</p>
     </a>
   );
 }
