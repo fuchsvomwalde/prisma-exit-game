@@ -21,6 +21,6 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ## TODO
 
 - [ ] add small database (supabase) to memorize game state
-- [ ] test and customize 404 pages
+- [ ] customize 404 page
 - [ ] add countdown (also via cookie possible)
 - [ ] add top scores

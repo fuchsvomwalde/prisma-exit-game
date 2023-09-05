@@ -7,10 +7,12 @@ import Image from "next/image";
 import {
   getAllGames,
   getFirstLevel,
+  getGame,
   getLevelBySlug,
 } from "../api/game/actions";
 import { NO_LEVEL } from "../api/game/constants";
 import { Game } from "../api/game/model";
+import { notFound } from "next/navigation";
 
 export default async function Game({
   params,
@@ -20,8 +22,13 @@ export default async function Game({
   const cookieStore = cookies();
   const passedLevelSlug = cookieStore.get(params.gameSlug)?.value ?? "";
   const passedAnyLevel = passedLevelSlug && passedLevelSlug !== NO_LEVEL;
+  const game = await getGame(params.gameSlug);
   const passedLevel = await getLevelBySlug(params.gameSlug, passedLevelSlug);
   const firstLevel = await getFirstLevel(params.gameSlug);
+
+  if (!game) {
+    notFound();
+  }
 
   const title = textToAsciArt("You win");
   const blankLine = getBlankLineByTitle(title);

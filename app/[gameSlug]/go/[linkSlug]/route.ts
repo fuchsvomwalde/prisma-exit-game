@@ -34,3 +34,5 @@ export async function generateStaticParams() {
     )
     .flat();
 }
+
+export const dynamicParams = false;

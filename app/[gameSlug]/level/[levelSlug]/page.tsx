@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { getGame, getLevelBySlug } from "@/app/api/game/actions";
 import { FORM_DATA_SUBMISSION_KEY } from "@/app/api/game/constants";
 import { Game } from "@/app/api/game/model";
@@ -12,6 +13,10 @@ export default async function GameLevel({
   params: { gameSlug: string; levelSlug: string };
 }) {
   const level = await getLevelBySlug(params.gameSlug, params.levelSlug);
+
+  if (!level) {
+    notFound();
+  }
 
   // TODO: replace title
   const title = textToAsciArt(level?.title ?? "");
@@ -77,9 +82,12 @@ export async function generateStaticParams({
 }: {
   params: { gameSlug: string; levelSlug: string };
 }) {
-  const game: Game = await getGame(params.gameSlug);
+  const game = await getGame(params.gameSlug);
 
-  return game.levels.map((level) => ({
-    levelSlug: level.slug,
-  }));
+  return (
+    game?.levels.map((level) => ({
+      gameSlug: params.gameSlug,
+      levelSlug: level.slug,
+    })) ?? []
+  );
 }
