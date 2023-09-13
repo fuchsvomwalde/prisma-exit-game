@@ -26,35 +26,63 @@ export interface Game {
 
 export const games: Array<Game> = [
   {
-    slug: "cl4ss7c",
+    slug: "cl4551c",
     name: "Classic",
     description: "First exit game from prisma games.",
     links: [
       {
-        slug: "sfg3",
-        href: "/oh-hi-mark.mp4",
+        slug: "8170",
+        href: "/",
       },
       {
-        slug: "kd49",
-        href: "https://letmegooglethat.com/?q=number+to+binary",
+        slug: "r00m",
+        href: "/",
       },
       {
-        slug: "0gt5",
-        href: "/secret.png",
+        slug: "h1d3",
+        href: "/",
       },
       {
-        slug: "3hbh",
-        href: "https://towardsdatascience.com/steganography-hiding-an-image-inside-another-77ca66b2acb1",
+        slug: "57g0",
+        href: "/",
       },
       {
-        slug: "05bw",
-        href: "https://stegonline.georgeom.net/embed",
+        slug: "rvr5",
+        href: "/",
       },
       {
-        slug: "pp2m",
-        // TODO: create reverse mp3
-        href: "/r3v3r53.m4a",
+        slug: "c0d3",
+        href: "/",
       },
+      // {
+      //   slug: "sfg3",
+      //   href: "/oh-hi-mark.mp4",
+      // },
+      // {
+      //   slug: "kd49",
+      //   href: "https://letmegooglethat.com/?q=number+to+binary",
+      // },
+      // {
+      //   slug: "0gt5",
+      //   href: "/secret.png",
+      // },
+      // {
+      //   slug: "3hbh",
+      //   href: "https://towardsdatascience.com/steganography-hiding-an-image-inside-another-77ca66b2acb1",
+      // },
+      // {
+      //   slug: "05bw",
+      //   href: "https://stegonline.georgeom.net/embed",
+      // },
+      // {
+      //   slug: "pp2m",
+      //   // TODO: create reverse mp3
+      //   href: "/r3v3r53.m4a",
+      // },
+      // {
+      //   slug: "7357",
+      //   href: "/cl4551c/level/w4rmup",
+      // },
     ],
     levels: [
       {
@@ -78,10 +106,10 @@ export const games: Array<Game> = [
         failure_message: "Meeh... ¯\\_(ツ)_/¯",
         solution_prompt: "Enter solution word",
         solution: "101011001",
-        next_slug: "room",
+        next_slug: "r00m",
       },
       {
-        slug: "room",
+        slug: "r00m",
         title: "Level 3",
         message: "Next game, next challenge.",
         success_message: "Well done!",
@@ -112,7 +140,7 @@ export const games: Array<Game> = [
       },
       {
         finalLevel: true,
-        slug: "pr1sm4",
+        slug: "pr15m4",
         title: "Level X",
         message: "Welcome to the last challenge.",
         success_message: "Congratulation, you won!",
