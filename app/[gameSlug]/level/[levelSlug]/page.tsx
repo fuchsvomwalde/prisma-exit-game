@@ -25,7 +25,7 @@ export default async function GameLevel({
   return (
     <Terminal>
       <main className="flex min-h-screen flex-col items-center justify-start p-8 lg:p-24">
-        <div className="mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
+        <div className="lg:max-w-5xl mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
           <NavTile
             href={`/${params.gameSlug}`}
             title="Back"
@@ -34,16 +34,16 @@ export default async function GameLevel({
           />
         </div>
 
-        <div className="mb-8 text-xs transform scale-75 lg:w-full lg:scale-100">
+        <div className="lg:max-w-5xl mb-8 text-xs transform scale-75 lg:w-full lg:scale-100">
           <div className="font-mono whitespace-pre-line">{title}</div>
           <div className="font-mono whitespace-nowrap">{blankLine}</div>
         </div>
 
-        <div className="mb-8 w-full">
+        <div className="lg:max-w-5xl mb-8 w-full">
           <AnimatedType message={level?.message ?? ""} />
         </div>
 
-        <div className="z-10 w-full items-center justify-between font-mono lg:flex">
+        <div className="lg:max-w-5xl z-10 w-full items-center justify-between font-mono lg:flex">
           <form
             action={`/${params.gameSlug}/level/${params.levelSlug}/submit`}
             method="get"

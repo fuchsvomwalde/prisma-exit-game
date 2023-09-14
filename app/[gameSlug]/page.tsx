@@ -1,34 +1,19 @@
 import NavTile from "@/components/NavTile";
-import SendMessage from "@/components/SendMessage";
 import Terminal from "@/components/Terminal";
 import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
-import { cookies } from "next/headers";
 import Image from "next/image";
-import {
-  getAllGames,
-  getFirstLevel,
-  getGame,
-  getLevelBySlug,
-} from "../api/game/actions";
-import { NO_LEVEL } from "../api/game/constants";
+import { getAllGames } from "../api/game/actions";
 import { Game } from "../api/game/model";
-import { notFound } from "next/navigation";
+import getGameState from "./_utils/useGameState";
 
 export default async function Game({
   params,
 }: {
   params: { gameSlug: string };
 }) {
-  const cookieStore = cookies();
-  const passedLevelSlug = cookieStore.get(params.gameSlug)?.value ?? "";
-  const passedAnyLevel = passedLevelSlug && passedLevelSlug !== NO_LEVEL;
-  const game = await getGame(params.gameSlug);
-  const passedLevel = await getLevelBySlug(params.gameSlug, passedLevelSlug);
-  const firstLevel = await getFirstLevel(params.gameSlug);
-
-  if (!game) {
-    notFound();
-  }
+  const { passedAnyLevel, passedLevel, firstLevel } = await getGameState(
+    params.gameSlug
+  );
 
   const title = textToAsciArt("You win");
   const blankLine = getBlankLineByTitle(title);
@@ -38,7 +23,7 @@ export default async function Game({
   return (
     <Terminal variant={terminalVariant}>
       <main className="flex min-h-screen flex-col items-center justify-between p-8 lg:p-24">
-        <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+        <div className="z-10 lg:max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
           <p className="whitespace-nowrap p-4 left-0 top-0 flex w-full justify-center dark:border-neutral-800 lg:static lg:w-auto lg:rounded-xl">
             Welcome to&nbsp;
             <code className="font-mono font-bold">Prisma</code>&nbsp;the exit
@@ -79,7 +64,7 @@ export default async function Game({
         {/* <SendMessage /> */}
 
         {passedAnyLevel && passedLevel?.finalLevel && (
-          <div className="mb-8 text-xs transform scale-75 lg:w-full lg:scale-100">
+          <div className="mb-8 text-xs transform scale-75 lg:max-w-5xl lg:w-full lg:scale-100">
             <div className="font-mono whitespace-pre-line">{title}</div>
             <div className="font-mono whitespace-nowrap">{blankLine}</div>
           </div>

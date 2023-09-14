@@ -20,6 +20,9 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## TODO
 
+- [ ] display levels and instruction pages in differen color modes
+- [ ] add i18n multi language model
+- [ ] send sms/mails with hints and infos depending on level and state
 - [ ] add small database (supabase) to memorize game state
 - [ ] customize 404 page
 - [ ] add countdown (also via cookie possible)

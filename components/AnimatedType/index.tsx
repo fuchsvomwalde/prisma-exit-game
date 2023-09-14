@@ -2,6 +2,9 @@
 
 import { TypeAnimation } from "react-type-animation";
 import styles from "./index.module.css";
+import { useState } from "react";
+
+const disableCursorAfterAnimationDelay = 1000;
 
 export default function AnimatedType({
   message,
@@ -12,10 +15,21 @@ export default function AnimatedType({
   delay?: number;
   speed?: 75 | 90;
 }) {
+  const [disableCursor, setDisableCursor] = useState(false);
+
   return (
-    <div className="font-mono">
+    <div className={`font-mono ${disableCursor ? styles.disableCursor : ""}`}>
       <TypeAnimation
-        sequence={[delay, message, () => {}]}
+        sequence={[
+          delay,
+          message,
+          () => {
+            setTimeout(
+              () => setDisableCursor(true),
+              disableCursorAfterAnimationDelay
+            );
+          },
+        ]}
         wrapper="p"
         cursor={false}
         repeat={0}
@@ -25,7 +39,7 @@ export default function AnimatedType({
           display: "block",
           fontFamily: "monospace",
         }}
-        className={styles.type}
+        className={styles.cursor}
       />
     </div>
   );

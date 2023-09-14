@@ -26,7 +26,7 @@ export default async function GameLevelResult({
   return (
     <Terminal variant={terminalVariant}>
       <main className="flex min-h-screen flex-col items-center justify-start p-8 lg:p-24">
-        <div className="mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
+        <div className="lg:max-w-5xl mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
           <NavTile
             href={`/${params.gameSlug}`}
             title="Back"
@@ -35,16 +35,16 @@ export default async function GameLevelResult({
           />
         </div>
 
-        <div className="mb-8 text-xs transform scale-75 lg:w-full lg:scale-100">
+        <div className="lg:max-w-5xl mb-8 text-xs transform scale-75 lg:w-full lg:scale-100">
           <div className="font-mono whitespace-pre-line">{title}</div>
           <div className="font-mono whitespace-nowrap">{blankLine}</div>
         </div>
 
-        <div className="mb-8 w-full">
+        <div className="lg:max-w-5xl mb-8 w-full flex-grow">
           <AnimatedType message={message ?? ""} />
         </div>
 
-        <div className="mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
+        <div className="lg:max-w-5xl mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
           {!passed && (
             <NavTile
               href={`/${params.gameSlug}/level/${params.levelSlug}`}
