@@ -1,4 +1,4 @@
-"use server";
+import "server-only";
 
 export async function sendMessage() {
   const encodedParams = new URLSearchParams();

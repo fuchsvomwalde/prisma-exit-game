@@ -1,6 +1,5 @@
-"use server";
-
 import { games } from "./model";
+import "server-only";
 
 export async function getAllGames() {
   return games;
