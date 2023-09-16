@@ -1,4 +1,28 @@
+import { StaticImageData } from "next/image";
 import "server-only";
+
+export interface Clue {
+  title: string;
+  description?: string;
+  text?: string;
+  image?: {
+    download: string;
+    src: string;
+    width: number;
+    height: number;
+  };
+  video?: {
+    src: string;
+    type: string;
+  };
+  audio?: string;
+  link?: string;
+}
+
+export interface Aid {
+  title: string;
+  messages: string[];
+}
 
 export interface Level {
   firstLevel?: boolean;
@@ -13,11 +37,17 @@ export interface Level {
   solution_prompt: string;
   solution: string;
   next_slug?: string;
+  clues?: Array<Clue>;
+  aids?: Array<Aid>;
 }
 
 export interface Link {
   slug: string;
   href: string;
+  /**
+   * TODO: add password protection
+   */
+  password?: string;
 }
 
 export interface Game {
@@ -35,19 +65,12 @@ export const games: Array<Game> = [
     description: "First exit game from prisma games.",
     links: [
       {
-        /**
-         * TODO: display link to binary calculator as the last hint, before that, show videos about binary system
-         */
         slug: "8170",
-        href: "https://letmegooglethat.com/?q=number+to+binary",
+        href: "/cl4551c/level/101/mystic-hints",
       },
       {
-        /**
-         * TODO: add additional hints:
-         * - snowflake and special light rays will reveal the secret
-         */
         slug: "r00m",
-        href: "/oh-hi-mark.mp4",
+        href: "/cl4551c/level/r00m/mystic-hints",
       },
       {
         /**
@@ -56,7 +79,7 @@ export const games: Array<Game> = [
          * - info about google reverse search to identify origins of pictures
          */
         slug: "h1d3",
-        href: "/secret.png",
+        href: "/cl4551c/level/chemistry/mystic-hints",
       },
       {
         /**
@@ -64,6 +87,7 @@ export const games: Array<Game> = [
          */
         slug: "57g0",
         href: "https://stegonline.georgeom.net/embed",
+        password: "einstein",
       },
       {
         /**
@@ -116,6 +140,39 @@ export const games: Array<Game> = [
         solution_prompt: "Input Secret Code",
         solution: "101011001",
         next_slug: "r00m",
+        clues: [
+          {
+            title: "Whispers of the Dual Realm",
+            text: "In a world where the ancient pulse beats twice, discover the rhythm that dances between two steps. Can you decipher the song of zeros and ones?",
+          },
+          {
+            title: "Journey to the Digital Playground",
+            description:
+              "Seek guidance from the realms of youthful wonder, where complex riddles are made simple. Will the innocent wisdom enlighten your path?",
+            link: "https://www.wdrmaus.de/filme/sachgeschichten/bis_1023_zaehlen.php5",
+          },
+        ],
+        aids: [
+          {
+            title: "Card with mystical pattern",
+            messages: [
+              `Within a canvas vast and wide,
+            A secret tool does there reside.
+            Let your gaze soften, not direct,
+            For depth's illusion you must detect.
+            
+            The awl in hiding plays its part,
+            Seek with patience, open heart.
+            Unfocus eyes and then you'll see,
+            The hidden message, clear and free.`,
+              "https://en.wikipedia.org/wiki/Autostereogram",
+            ],
+          },
+          {
+            title: "Binary Encoding",
+            messages: ["https://letmegooglethat.com/?q=number+to+binary"],
+          },
+        ],
       },
       {
         slug: "r00m",
@@ -143,6 +200,39 @@ Will be the key that guides you through.`,
         solution_prompt: "Enter the Echoed Number",
         solution: "15",
         next_slug: "chemistry",
+        clues: [
+          {
+            title: "Ready to enter the r00m?",
+            video: {
+              src: "/r00m.mp4",
+              type: "video/mp4",
+            },
+          },
+        ],
+        aids: [
+          {
+            title: "Video",
+            messages: [
+              `Find the two names you are looking for, count how many times they appear in the video and enter the sum of the two as the solution word.`,
+            ],
+          },
+          {
+            title: "Card with gray characters",
+            messages: [
+              `Not all is visible to the naked eye.`,
+              `The hidden message is somewhere on the card.`,
+              `Let the ultraviolet unveil what's hidden in plain sight.`,
+            ],
+          },
+          {
+            title: "Card with red framed name",
+            messages: [
+              `The frost has a tale to tell. Allow the cold to whisper its secrets.`,
+              `Place the card where cold reigns, and watch the hidden name emerge.`,
+              `Put the card in your damn freezer and wait 1 minute.`,
+            ],
+          },
+        ],
       },
       {
         slug: "chemistry",
@@ -156,6 +246,60 @@ Will be the key that guides you through.`,
         solution_prompt: "Input Secret Code",
         solution: "heisenberg",
         next_slug: "noctual-animal",
+        clues: [
+          {
+            title: "The Secret of Prisma",
+            image: {
+              download: "secret.png",
+              src: "/secret.png",
+              width: 457,
+              height: 257,
+            },
+          },
+          {
+            title: "The picture in the picture",
+            link: "https://towardsdatascience.com/steganography-hiding-an-image-inside-another-77ca66b2acb1",
+          },
+          {
+            title: "Do you know me?",
+            description: "I'm a talented and passionated creator of stories.",
+            image: {
+              download: "the-artist.png",
+              src: "/the-artist.png",
+              width: 99,
+              height: 97,
+            },
+          },
+          {
+            title: "Gateway to the hidden secret",
+            link: "/cl4551c/go/57g0",
+          },
+        ],
+        aids: [
+          {
+            title: "The 'secret.png' image of Prisma",
+            messages: [
+              "Every image holds more than what the eye can see.",
+              "Harness the power of the web to unlock what's hidden in 'secret.png'.",
+              "Use the tool locked behind the password protected link, upload the 'secret.png' image and apply the parameters from your card and see what's hidden inside.",
+              "You do not recognize the revealed person? Use google reverse picture search to identify the name of the person. The name will be the password for the level.",
+            ],
+          },
+          {
+            title: "The famous picture of the artist",
+            messages: [
+              "Behind great faces, other legends hide. Can you identify the genius peeking through?",
+              "Red reveals the password for the secret image.",
+            ],
+          },
+          {
+            title: "The password protected link",
+            messages: [
+              "Look beyond Shakespeare. What did the red unveil? Red reveals the password.",
+              "Combine the mystic parameters with the 'secret.png'.",
+            ],
+          },
+        ],
       },
       {
         slug: "noctual-animal",

@@ -20,6 +20,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## TODO
 
+- [ ] add hints via game links
 - [ ] display levels and instruction pages in differen color modes
 - [ ] add i18n multi language model
 - [ ] send sms/mails with hints and infos depending on level and state

@@ -1,5 +1,5 @@
-import { getFirstLevel, getGame, getLevelBySlug } from "@/app/api/game/actions";
-import { NO_LEVEL } from "@/app/api/game/constants";
+import { getFirstLevel, getGame, getLevelBySlug } from "@/app/api/_lib/actions";
+import { NO_LEVEL } from "@/app/api/_lib/constants";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import "server-only";

@@ -1,5 +1,5 @@
-import { getAllGames, getLinkBySlug } from "@/app/api/game/actions";
-import { Game } from "@/app/api/game/model";
+import { getAllGames, getLinkBySlug } from "@/app/api/_lib/actions";
+import { Game } from "@/app/api/_lib/model";
 import { NextResponse } from "next/server";
 
 export async function GET(

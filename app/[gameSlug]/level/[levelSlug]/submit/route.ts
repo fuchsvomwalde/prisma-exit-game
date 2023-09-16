@@ -1,5 +1,5 @@
-import { getLevelByNextSlug, getLevelBySlug } from "@/app/api/game/actions";
-import { FORM_DATA_SUBMISSION_KEY, NO_LEVEL } from "@/app/api/game/constants";
+import { getLevelByNextSlug, getLevelBySlug } from "@/app/api/_lib/actions";
+import { FORM_DATA_SUBMISSION_KEY, NO_LEVEL } from "@/app/api/_lib/constants";
 import { NextResponse } from "next/server";
 
 export async function GET(

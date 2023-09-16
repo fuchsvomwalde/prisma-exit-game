@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
-import { getGame, getLevelBySlug } from "@/app/api/game/actions";
-import { FORM_DATA_SUBMISSION_KEY } from "@/app/api/game/constants";
-import { Game } from "@/app/api/game/model";
+import { getGame, getLevelBySlug } from "@/app/api/_lib/actions";
+import { FORM_DATA_SUBMISSION_KEY } from "@/app/api/_lib/constants";
 import AnimatedType from "@/components/AnimatedType";
 import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
@@ -43,7 +42,7 @@ export default async function GameLevel({
           <AnimatedType message={level?.message ?? ""} />
         </div>
 
-        <div className="lg:max-w-5xl z-10 w-full items-center justify-between font-mono lg:flex">
+        <div className="lg:max-w-5xl z-10 w-full items-start justify-between font-mono lg:flex flex-grow">
           <form
             action={`/${params.gameSlug}/level/${params.levelSlug}/submit`}
             method="get"
@@ -71,6 +70,19 @@ export default async function GameLevel({
               Submit
             </button>
           </form>
+        </div>
+
+        <div className="lg:max-w-5xl mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
+          <NavTile
+            href={`/${params.gameSlug}/level/${params.levelSlug}/mystic-hints`}
+            title="Unearth Clues"
+            subline={`Dive into the world of mysteries and discover the secrets needed to progress.`}
+          />
+          <NavTile
+            href={`/${params.gameSlug}/level/${params.levelSlug}/ancient-aid`}
+            title="Seek Guidance"
+            subline={`Lost in the enigma? Summon ancient wisdom and gain insights to find your path forward.`}
+          />
         </div>
       </main>
     </Terminal>

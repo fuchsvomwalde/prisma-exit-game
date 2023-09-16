@@ -1,8 +1,8 @@
 import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
 import Image from "next/image";
-import { getAllGames } from "./api/game/actions";
-import { Game } from "./api/game/model";
+import { getAllGames } from "./api/_lib/actions";
+import { Game } from "./api/_lib/model";
 
 export default async function Home() {
   const games: Array<Game> = await getAllGames();

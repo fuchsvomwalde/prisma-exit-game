@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { NO_LEVEL } from "../../api/game/constants";
+import { NO_LEVEL } from "../../api/_lib/constants";
 
 export async function GET(
   request: Request,

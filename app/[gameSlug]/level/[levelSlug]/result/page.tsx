@@ -1,4 +1,4 @@
-import { getLevelBySlug } from "@/app/api/game/actions";
+import { getLevelBySlug } from "@/app/api/_lib/actions";
 import AnimatedType from "@/components/AnimatedType";
 // import { GameReward } from "@/components/GameReward";
 import NavTile from "@/components/NavTile";
@@ -34,7 +34,7 @@ export default async function GameLevelResult({
   return (
     <Terminal variant={terminalVariant}>
       <div className="flex w-full items-center justify-center">
-        {passed && <GameReward start={passed} loop />}
+        {passed && <GameReward start={passed} loop={level?.finalLevel} />}
       </div>
       <main className="flex min-h-screen flex-col items-center justify-start p-8 lg:p-24">
         <div className="lg:max-w-5xl mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
