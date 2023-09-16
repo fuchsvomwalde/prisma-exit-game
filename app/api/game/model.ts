@@ -6,7 +6,9 @@ export interface Level {
   slug: string;
   title: string;
   message: string;
+  success_title?: string;
   success_message: string;
+  failure_title?: string;
   failure_message: string;
   solution_prompt: string;
   solution: string;
@@ -178,6 +180,7 @@ Will be the key that guides you through.`,
         Not all journeys find their rightful end.
         Sometimes, to truly see the game's whole span,
         One must step outside the rules, and hatch a new plan.`,
+        success_title: "You win",
         success_message: `Congratulations! Your entry into the heart of Prisma has revealed the intricate tapestry of a shadowy organization that has determined the destiny of our world since time immemorial. Wars, disasters, and even climate change - you might wonder how it could all be part of a plan. Believe us, not all of it was part of a plan, but you'd rather not imagine the chaos in the world without the hand of Prisma. Your test has been passed, and we look forward to welcoming you into our ranks. Our agents are already on their way to your location. Pack your bags, because the real adventure is just beginning.
 
         ~~~ THE END ~~~

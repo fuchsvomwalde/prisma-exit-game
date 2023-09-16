@@ -1,6 +1,5 @@
 import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
-import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
 import Image from "next/image";
 import { getAllGames } from "../api/game/actions";
 import { Game } from "../api/game/model";
@@ -15,8 +14,6 @@ export default async function Game({
     params.gameSlug
   );
 
-  const title = textToAsciArt("You win");
-  const blankLine = getBlankLineByTitle(title);
   const terminalVariant =
     passedAnyLevel && passedLevel?.finalLevel ? "success" : "default";
 
@@ -62,14 +59,6 @@ export default async function Game({
 
         {/* TODO: here we can test SMS services */}
         {/* <SendMessage /> */}
-
-        {passedAnyLevel && passedLevel?.finalLevel && (
-          <div className="mb-8 text-xs transform scale-75 lg:max-w-5xl lg:w-full lg:scale-100">
-            <div className="font-mono whitespace-pre-line">{title}</div>
-            <div className="font-mono whitespace-nowrap">{blankLine}</div>
-          </div>
-        )}
-
         <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
           {!passedAnyLevel && (
             <NavTile
@@ -78,9 +67,13 @@ export default async function Game({
               subline="Start game as soon as you are ready."
             />
           )}
-          {passedAnyLevel && passedLevel?.next_slug && (
+          {passedAnyLevel && (
             <NavTile
-              href={`/${params.gameSlug}/level/${passedLevel?.next_slug}`}
+              href={
+                !passedLevel?.finalLevel
+                  ? `/${params.gameSlug}/level/${passedLevel?.next_slug}`
+                  : `/${params.gameSlug}/level/${passedLevel?.slug}/result`
+              }
               title="Continue"
               subline="Continue where you left."
             />
