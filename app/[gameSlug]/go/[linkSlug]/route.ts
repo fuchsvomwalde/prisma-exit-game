@@ -1,4 +1,8 @@
 import { getAllGames, getLinkBySlug } from "@/app/api/_lib/actions";
+import {
+  FORM_DATA_LINK_ACCESS_DENIED,
+  FORM_DATA_LINK_PASSWORD,
+} from "@/app/api/_lib/constants";
 import { Game } from "@/app/api/_lib/model";
 import { NextResponse } from "next/server";
 
@@ -6,13 +10,32 @@ export async function GET(
   request: Request,
   { params }: { params: { gameSlug: string; linkSlug: string } }
 ) {
-  const currentLink = await getLinkBySlug(params.gameSlug, params.linkSlug);
+  const { searchParams } = new URL(request.url);
+  const password = searchParams.get(FORM_DATA_LINK_PASSWORD);
+
+  const goToLink = await getLinkBySlug(params.gameSlug, params.linkSlug);
 
   try {
+    const isPasswordProtected = Boolean(goToLink?.password);
+    const isPasswordSubmitted = Boolean(password);
+    const isPasswordMatch =
+      `${password}`?.trim()?.toLowerCase() === goToLink?.password;
+
+    if (isPasswordProtected && !isPasswordMatch) {
+      return NextResponse.redirect(
+        new URL(
+          isPasswordSubmitted
+            ? `/${params.gameSlug}/go/${params.linkSlug}/password?${FORM_DATA_LINK_ACCESS_DENIED}=wrong-password`
+            : `/${params.gameSlug}/go/${params.linkSlug}/password`,
+          request.url
+        )
+      );
+    }
+
     return NextResponse.redirect(
-      currentLink?.href?.startsWith("/")
-        ? new URL(currentLink?.href, request.url)
-        : new URL(currentLink?.href ?? "")
+      goToLink?.href?.startsWith("/")
+        ? new URL(goToLink?.href, request.url)
+        : new URL(goToLink?.href ?? "")
     );
   } catch {
     // TODO: add fancier 404

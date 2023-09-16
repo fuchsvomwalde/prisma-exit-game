@@ -6,16 +6,21 @@ export interface Clue {
   description?: string;
   text?: string;
   image?: {
-    download: string;
+    download?: string;
     src: string;
     width: number;
     height: number;
   };
   video?: {
+    download?: string;
     src: string;
     type: string;
   };
-  audio?: string;
+  audio?: {
+    download?: string;
+    src: string;
+    type: string;
+  };
   link?: string;
 }
 
@@ -73,43 +78,21 @@ export const games: Array<Game> = [
         href: "/cl4551c/level/r00m/mystic-hints",
       },
       {
-        /**
-         * TODO: add additional hints:
-         * - poem about the other link and about that red reveals the secret
-         * - info about google reverse search to identify origins of pictures
-         */
         slug: "h1d3",
         href: "/cl4551c/level/chemistry/mystic-hints",
       },
       {
-        /**
-         * TODO: protect link with password: "einstein"
-         */
         slug: "57g0",
         href: "https://stegonline.georgeom.net/embed",
         password: "einstein",
       },
       {
-        /**
-         * TODO: add additional hints:
-         * - use revers playback online tools
-         * - poem about the secret behind the numbers: GPS coordinates
-         * - info about google maps and that you can enter GPS coordinates
-         * - info about noctual animals
-         */
         slug: "rvr5",
-        href: "/r3v3r53.mp3",
+        href: "/cl4551c/level/noctual-animal/mystic-hints",
       },
       {
-        /**
-         * TODO: add additional hints:
-         * - poem about the puzzle that will guide you to the secret of the kryptex
-         * - blueprint of the prisma encoder mechanism
-         * - poem with hint to patterns that will reveal the sequence
-         * - poem with hint about the flux foil that will reveal secrets of the numpad
-         */
         slug: "c0d3",
-        href: "/",
+        href: "/cl4551c/level/pr15m4/mystic-hints",
       },
     ],
     levels: [
@@ -127,6 +110,34 @@ export const games: Array<Game> = [
         solution_prompt: "Input Secret Code",
         solution: "hello world",
         next_slug: "101",
+        aids: [
+          {
+            title: "The missing puzzle piece",
+            messages: [
+              "Don't worry everything in the game has its purpose, at the very end of the journey you will understand everything.",
+            ],
+          },
+          {
+            title: "The UV lamp",
+            messages: [
+              "The UV lamp will help you to find hidden messages.",
+              "Use the UV lamp to reveal the hidden message on the puzzle.",
+            ],
+          },
+          {
+            title: "The puzzle",
+            messages: [
+              "The puzzle contains a secret message not visible for the human eye.",
+              "Use the UV lamp to reveal the hidden message on the puzzle.",
+            ],
+          },
+          {
+            title: "The four cards with colored borders",
+            messages: [
+              "No worries, you will find out what to do with them later, you don't need them for this level.",
+            ],
+          },
+        ],
       },
       {
         slug: "101",
@@ -154,7 +165,7 @@ export const games: Array<Game> = [
         ],
         aids: [
           {
-            title: "Card with mystical pattern",
+            title: "The card with the mysterious pattern",
             messages: [
               `Within a canvas vast and wide,
             A secret tool does there reside.
@@ -171,6 +182,12 @@ export const games: Array<Game> = [
           {
             title: "Binary Encoding",
             messages: ["https://letmegooglethat.com/?q=number+to+binary"],
+          },
+          {
+            title: "The mysterious foil",
+            messages: [
+              "No worries, you will find out what to do with it later, you don't need it for this level.",
+            ],
           },
         ],
       },
@@ -211,13 +228,13 @@ Will be the key that guides you through.`,
         ],
         aids: [
           {
-            title: "Video",
+            title: "The Video",
             messages: [
               `Find the two names you are looking for, count how many times they appear in the video and enter the sum of the two as the solution word.`,
             ],
           },
           {
-            title: "Card with gray characters",
+            title: "The card with gray characters",
             messages: [
               `Not all is visible to the naked eye.`,
               `The hidden message is somewhere on the card.`,
@@ -225,11 +242,17 @@ Will be the key that guides you through.`,
             ],
           },
           {
-            title: "Card with red framed name",
+            title: "The card with red framed name",
             messages: [
               `The frost has a tale to tell. Allow the cold to whisper its secrets.`,
               `Place the card where cold reigns, and watch the hidden name emerge.`,
               `Put the card in your damn freezer and wait 1 minute.`,
+            ],
+          },
+          {
+            title: "The red foil",
+            messages: [
+              "No worries, you will find out what to do with it later, you don't need it for this level.",
             ],
           },
         ],
@@ -279,8 +302,7 @@ Will be the key that guides you through.`,
           {
             title: "The 'secret.png' image of Prisma",
             messages: [
-              "Every image holds more than what the eye can see.",
-              "Harness the power of the web to unlock what's hidden in 'secret.png'.",
+              "The image holds more than what the eye can see.",
               "Use the tool locked behind the password protected link, upload the 'secret.png' image and apply the parameters from your card and see what's hidden inside.",
               "You do not recognize the revealed person? Use google reverse picture search to identify the name of the person. The name will be the password for the level.",
             ],
@@ -289,7 +311,7 @@ Will be the key that guides you through.`,
             title: "The famous picture of the artist",
             messages: [
               "Behind great faces, other legends hide. Can you identify the genius peeking through?",
-              "Red reveals the password for the secret image.",
+              "Red reveals the password for the protected link.",
             ],
           },
           {
@@ -297,6 +319,12 @@ Will be the key that guides you through.`,
             messages: [
               "Look beyond Shakespeare. What did the red unveil? Red reveals the password.",
               "Combine the mystic parameters with the 'secret.png'.",
+            ],
+          },
+          {
+            title: "The flashlight",
+            messages: [
+              "No worries, you will find out what to do with it later, you don't need it for this level.",
             ],
           },
         ],
@@ -313,17 +341,51 @@ Will be the key that guides you through.`,
         solution_prompt: "Input Secret Code",
         solution: "847m4n",
         next_slug: "pr15m4",
+        clues: [
+          {
+            title: "A call from outer space",
+            audio: {
+              download: "r3v3r53.mp3",
+              src: "/r3v3r53.mp3",
+              type: "audio/mpeg",
+            },
+          },
+        ],
+        aids: [
+          {
+            title: "The audio file",
+            messages: [
+              "The audio file is a reversed audio file. Use an online tool to reverse the audio file and listen to the message.",
+              "The message are geo coordinates. Use google maps to find the location.",
+              "The location will reveal a noctual animal. An assiciated name of the animal is the password for the level.",
+              "The secret code is the name of a superhero in leetspeak.",
+            ],
+          },
+          {
+            title: "The leetspeak table",
+            messages: [
+              "The leetspeak table will help you to translate the found name from the audio file into the secret code.",
+              "https://en.wikipedia.org/wiki/Leet",
+            ],
+          },
+          {
+            title: "The red cube",
+            messages: [
+              "No worries, you don't need it for this level, but you'll need it very soon.",
+            ],
+          },
+        ],
       },
       {
         finalLevel: true,
         slug: "pr15m4",
-        title: "Level X",
+        title: "Endgame",
         message: `The culmination of your journey with Prisma beckons. Before you sits a metal box, stoic and formidable, engraved with the final number - six. But, as you'll discover, unlocking this last threshold requires more than mere intellect. If you have been attentive, perceptive, and perhaps a touch devious, you may already possess the means to access its contents. If not, a poetic hint will guide you towards the unexpected:
 
         In a cube where pathways twist and bend,
         Not all journeys find their rightful end.
         Sometimes, to truly see the game's whole span,
-        One must step outside the rules, and hatch a new plan.`,
+        One must step outside the rules, and hack a new plan.`,
         success_title: "You win",
         success_message: `Congratulations! Your entry into the heart of Prisma has revealed the intricate tapestry of a shadowy organization that has determined the destiny of our world since time immemorial. Wars, disasters, and even climate change - you might wonder how it could all be part of a plan. Believe us, not all of it was part of a plan, but you'd rather not imagine the chaos in the world without the hand of Prisma. Your test has been passed, and we look forward to welcoming you into our ranks. Our agents are already on their way to your location. Pack your bags, because the real adventure is just beginning.
 
@@ -334,6 +396,63 @@ Will be the key that guides you through.`,
           "Ah, so close and yet so far. The finale is a test of all you've learned and some you've perhaps overlooked. Remember, in Prisma's world, not all is as it seems. Think outside the confines of convention. Reassess, revisit, and when ready, enter the heart of the enigma. The destiny of Prisma awaits your final touch.",
         solution_prompt: "Input Secret Code",
         solution: "3301",
+        clues: [
+          {
+            title: "The key for the cryptex",
+            text: `In a realm where shadows touch the light,
+            At the start of the digital night,
+            Seek the beginning, where tales first spun,
+            For in that puzzle, the answer's easily done.
+            
+            Masters await, their hope starts to wane,
+            For the password's simple, clear as rain.
+            With such an easy clue given to thee,
+            Their disappointment great, if you don't already see.`,
+          },
+          {
+            title: "The Final Gambit",
+            text: `In the labyrinth of echoes, you've come so far,
+            Chasing the tail of the brightest star.
+            But here at the end, where all games do cease,
+            The Masters play a trick, a mischievous tease.
+            
+            "Seek not for more guidance, for it won't appear,
+            For this is the moment we hold most dear.
+            You've been graced with clues, with riddles, with jest,
+            But now you're on your own, for this final test."
+            
+            The shadows laugh, the echoes play,
+            "No more hints," they slyly say.
+            So trust your gut, your mind, your soul,
+            For this is the challenge, your ultimate goal.`,
+          },
+        ],
+        aids: [
+          {
+            title: "The locked box with the number 6",
+            messages: [
+              "The key is inside the red cube of level 5.",
+              "Yes you have to literally open the cube to get the key.",
+            ],
+          },
+          {
+            title: "The cryptex",
+            messages: [
+              "The passwort of the cryptex is writton on the puzzle of level 1.",
+            ],
+          },
+          {
+            title: "The Prism Cube",
+            messages: [
+              "The prism, together with all the accumulated tools from the previous levels, will help you find out the final solution word.",
+              "To use the prism you need the four cards with the red, green and blue borders and a strong light source like the flashlight (not the UV lamp).",
+              "When the refracted light from the prism is aligned with the correct colors of the cards, the arrow from the prism points to the searched symbol of the card.",
+              "To decode the symbols you need the number card (numbers from 0-9) and the flux card (from level 2).",
+              "The flux card can be placed on the number card and reveals the symbols behind it.",
+              "So the four color cards make four numbers, you get the correct order if you look where the paper patterns of the color cards are still to be found, take a good look at all the boxes again.",
+            ],
+          },
+        ],
       },
     ],
   },

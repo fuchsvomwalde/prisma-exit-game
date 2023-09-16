@@ -1,5 +1,8 @@
 import { getLevelByNextSlug, getLevelBySlug } from "@/app/api/_lib/actions";
-import { FORM_DATA_SUBMISSION_KEY, NO_LEVEL } from "@/app/api/_lib/constants";
+import {
+  FORM_DATA_LEVEL_SUBMIT_PASSCODE,
+  NO_LEVEL,
+} from "@/app/api/_lib/constants";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -11,11 +14,11 @@ export async function GET(
   }
 ) {
   const { searchParams } = new URL(request.url);
-  const submissionValue = searchParams.get(FORM_DATA_SUBMISSION_KEY);
+  const passcode = searchParams.get(FORM_DATA_LEVEL_SUBMIT_PASSCODE);
 
   const currentLevel = await getLevelBySlug(params.gameSlug, params.levelSlug);
 
-  if (`${submissionValue}`?.trim()?.toLowerCase() === currentLevel?.solution) {
+  if (`${passcode}`?.trim()?.toLowerCase() === currentLevel?.solution) {
     const response = NextResponse.redirect(
       new URL(
         `/${params.gameSlug}/level/${params.levelSlug}/result`,

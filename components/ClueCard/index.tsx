@@ -45,9 +45,9 @@ function ClueCardContent({ clue }: ClueCardProps) {
         >
           <path
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"
           />
         </svg>
@@ -81,10 +81,84 @@ function ClueCardContent({ clue }: ClueCardProps) {
           </button>
         )}
         {revealed && (
-          <video className="w-full" controls>
-            <source src={clue?.video?.src} type={clue?.video?.type} />
-            Your browser does not support the video tag.
-          </video>
+          <div className="flex flex-col gap-4 items-start">
+            <video className="w-full" controls>
+              <source src={clue?.video?.src} type={clue?.video?.type} />
+              Your browser does not support the video tag.
+            </video>
+            {clue?.video?.download && (
+              <a href={clue?.video?.src} download={clue?.video?.download}>
+                <button
+                  type="button"
+                  className="border border-gray-800 hover:bg-gray-900 dark:border-gray-600 dark:hover:bg-gray-600 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-blue-800"
+                >
+                  <svg
+                    className="w-3.5 h-3.5 mr-2 rotate-90"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 10"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9"
+                    />
+                  </svg>
+                  Download
+                </button>
+              </a>
+            )}
+          </div>
+        )}
+      </>
+    );
+  if (clue?.audio)
+    return (
+      <>
+        {!revealed && (
+          <button
+            type="button"
+            className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+            onClick={() => setRevealed(true)}
+          >
+            Reveal
+          </button>
+        )}
+        {revealed && (
+          <div className="flex flex-col gap-4 items-start">
+            <audio className="w-full" controls>
+              <source src={clue?.audio?.src} type={clue?.audio?.type} />
+              Your browser does not support the audio tag.
+            </audio>
+            {clue?.audio?.download && (
+              <a href={clue?.audio?.src} download={clue?.audio?.download}>
+                <button
+                  type="button"
+                  className="border border-gray-800 hover:bg-gray-900 dark:border-gray-600 dark:hover:bg-gray-600 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-blue-800"
+                >
+                  <svg
+                    className="w-3.5 h-3.5 mr-2 rotate-90"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 10"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9"
+                    />
+                  </svg>
+                  Download
+                </button>
+              </a>
+            )}
+          </div>
         )}
       </>
     );
@@ -101,35 +175,37 @@ function ClueCardContent({ clue }: ClueCardProps) {
           </button>
         )}
         {revealed && (
-          <div className="flex flex-col gap-2 items-start">
+          <div className="flex flex-col gap-4 items-start">
             <Image
               className="h-auto max-w-full rounded-lg"
               alt="clue in image"
               {...clue?.image}
             />
-            <a href={clue?.image?.src} download={clue?.image?.download}>
-              <button
-                type="button"
-                className="border border-gray-800 hover:bg-gray-900 dark:border-gray-600 dark:hover:bg-gray-600 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-blue-800"
-              >
-                <svg
-                  className="w-3.5 h-3.5 mr-2 rotate-90"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 10"
+            {clue?.image?.download && (
+              <a href={clue?.image?.src} download={clue?.image?.download}>
+                <button
+                  type="button"
+                  className="border border-gray-800 hover:bg-gray-900 dark:border-gray-600 dark:hover:bg-gray-600 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-blue-800"
                 >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M1 5h12m0 0L9 1m4 4L9 9"
-                  />
-                </svg>
-                Download
-              </button>
-            </a>
+                  <svg
+                    className="w-3.5 h-3.5 mr-2 rotate-90"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 10"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9"
+                    />
+                  </svg>
+                  Download
+                </button>
+              </a>
+            )}
           </div>
         )}
       </>

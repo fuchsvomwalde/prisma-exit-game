@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getGame, getLevelBySlug } from "@/app/api/_lib/actions";
-import { FORM_DATA_SUBMISSION_KEY } from "@/app/api/_lib/constants";
+import { FORM_DATA_LEVEL_SUBMIT_PASSCODE } from "@/app/api/_lib/constants";
 import AnimatedType from "@/components/AnimatedType";
 import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
@@ -60,7 +60,7 @@ export default async function GameLevel({
               id="password"
               className="mb-4 bg-gray-50 w-full border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder=""
-              name={FORM_DATA_SUBMISSION_KEY}
+              name={FORM_DATA_LEVEL_SUBMIT_PASSCODE}
               required
             />
             <button
@@ -81,7 +81,7 @@ export default async function GameLevel({
           <NavTile
             href={`/${params.gameSlug}/level/${params.levelSlug}/ancient-aid`}
             title="Seek Guidance"
-            subline={`Lost in the enigma? Summon ancient wisdom and gain insights to find your path forward.`}
+            subline={`Lost in the enigma? Gain insights, but aware, spoilers ahead.`}
           />
         </div>
       </main>
