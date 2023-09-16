@@ -39,4 +39,4 @@ export async function generateStaticParams() {
  * important: we have to set the runtime paramter in order to get the route work in production
  */
 export const dynamicParams = false;
-export const runtime = "nodejs";
+export const runtime = "edge";
