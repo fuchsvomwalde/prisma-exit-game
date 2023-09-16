@@ -20,8 +20,14 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## TODO
 
+### IMPORTANT
+
+- [ ] get r00m video to work on iPhone/mobile
+- [ ] protect access of future levels by checking cookie
+
+### NICE TO HAVE
+
 - [ ] add fancier 404 for go/ links
-- [ ] display levels and instruction pages in differen color modes
 - [ ] add i18n multi language model
 - [ ] send sms/mails with hints and infos depending on level and state
 - [ ] add small database (supabase) to memorize game state
