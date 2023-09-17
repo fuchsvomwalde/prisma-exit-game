@@ -22,13 +22,17 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ### IMPORTANT
 
-- [ ] get r00m video to work on iPhone/mobile
+- [ ] add i18n multi language model
+  - [ ] update html lang attribute on locale change
+  - [ ] add language switch to global app bar
+  - [ ] translate all languages
+- [ ] get video streaming to work on iPhone/mobile (byte range support)
+- [ ] check why mp4 can not be played in iOS
 - [ ] protect access of future levels by checking cookie
 
 ### NICE TO HAVE
 
 - [ ] add fancier 404 for go/ links
-- [ ] add i18n multi language model
 - [ ] send sms/mails with hints and infos depending on level and state
 - [ ] add small database (supabase) to memorize game state
 - [ ] customize 404 page

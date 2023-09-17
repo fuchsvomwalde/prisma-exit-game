@@ -15,6 +15,10 @@ export interface Clue {
     download?: string;
     src: string;
     type: string;
+    fallback?: Array<{
+      src: string;
+      type: string;
+    }>;
   };
   audio?: {
     download?: string;
@@ -221,8 +225,19 @@ Will be the key that guides you through.`,
           {
             title: "Ready to enter the r00m?",
             video: {
-              src: "/r00m.mp4",
+              download: "r00m.mp4",
+              src: "/cl4551c/r00m.mp4",
               type: "video/mp4",
+              fallback: [
+                {
+                  src: "/cl4551c/r00m.webm",
+                  type: "video/webm",
+                },
+                {
+                  src: "/cl4551c/r00m.ogv",
+                  type: "video/ogv",
+                },
+              ],
             },
           },
         ],
@@ -274,7 +289,7 @@ Will be the key that guides you through.`,
             title: "The Secret of Prisma",
             image: {
               download: "secret.png",
-              src: "/secret.png",
+              src: "/cl4551c/secret.png",
               width: 457,
               height: 257,
             },
@@ -288,7 +303,7 @@ Will be the key that guides you through.`,
             description: "I'm a talented and passionated creator of stories.",
             image: {
               download: "the-artist.png",
-              src: "/the-artist.png",
+              src: "/cl4551c/the-artist.png",
               width: 99,
               height: 97,
             },
@@ -346,7 +361,7 @@ Will be the key that guides you through.`,
             title: "A call from outer space",
             audio: {
               download: "r3v3r53.mp3",
-              src: "/r3v3r53.mp3",
+              src: "/cl4551c/r3v3r53.mp3",
               type: "audio/mpeg",
             },
           },

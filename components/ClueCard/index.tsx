@@ -11,7 +11,7 @@ export interface ClueCardProps {
 
 export default function ClueCard({ clue }: ClueCardProps) {
   return (
-    <div className="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full text-left p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white font-mono">
         {clue.title}
       </h5>
@@ -82,10 +82,18 @@ function ClueCardContent({ clue }: ClueCardProps) {
         )}
         {revealed && (
           <div className="flex flex-col gap-4 items-start">
-            <video className="w-full" controls>
+            <video className="w-full" controls playsInline>
               <source src={clue?.video?.src} type={clue?.video?.type} />
+              {clue?.video?.fallback &&
+                clue?.video?.fallback?.map(({ src, type }) => (
+                  <source key={src} src={src} type={type} />
+                ))}
               Your browser does not support the video tag.
             </video>
+            <p className="text-mono text-xs text-gray-800 dark:text-gray-200">
+              Video streaming is currently not supported for all browsers. If
+              the video does not play, download the file.
+            </p>
             {clue?.video?.download && (
               <a href={clue?.video?.src} download={clue?.video?.download}>
                 <button

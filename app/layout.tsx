@@ -1,3 +1,4 @@
+import { locales } from "@/i18n/settings";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -11,12 +12,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang={params.locale} className="dark">
       <body className={inter.className}>{children}</body>
     </html>
+  );
+}
+
+export async function generateStaticParams() {
+  return (
+    locales.map((locale) => ({
+      locale: locale,
+    })) ?? []
   );
 }

@@ -37,11 +37,8 @@ export default function AidAccordion({ aids }: AidAccordionProps) {
         const isCollapsed = !isExpanded;
 
         return (
-          <>
-            <h2
-              key={`aid-${aidIndex}-heading`}
-              id={`accordion-heading-${aidIndex}`}
-            >
+          <div key={`aid-${aidIndex}`}>
+            <h2 id={`accordion-heading-${aidIndex}`}>
               <button
                 type="button"
                 className={`flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border ${
@@ -80,9 +77,8 @@ export default function AidAccordion({ aids }: AidAccordionProps) {
               </button>
             </h2>
             <div
-              key={`aid-${aidIndex}-body`}
               id={`accordion-body-${aidIndex}`}
-              className={isCollapsed ? "hidden" : ""}
+              className={isCollapsed ? "hidden text-left" : "text-left"}
               aria-labelledby={`accordion-heading-${aidIndex}`}
             >
               <div
@@ -148,7 +144,7 @@ export default function AidAccordion({ aids }: AidAccordionProps) {
                 })}
               </div>
             </div>
-          </>
+          </div>
         );
       })}
     </div>
