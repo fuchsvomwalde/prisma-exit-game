@@ -57,7 +57,11 @@ export const useTranslation = (messages: I18nLocaleTextBundle) => {
   return { t };
 };
 
-export const serverTranslation = async (messages: I18nLocaleTextBundle) => {
+export const serverTranslation = async (
+  messageLoader: (locale: string) => Promise<I18nLocaleTextBundle>,
+  locale: string
+) => {
+  const messages = await messageLoader(locale);
   const t = _translate(messages);
 
   return { t };

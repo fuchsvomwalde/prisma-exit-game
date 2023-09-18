@@ -1,10 +1,15 @@
 import { StaticImageData } from "next/image";
 import "server-only";
 
+export interface TranslationNode {
+  de: string;
+  en: string;
+  [key: string]: string;
+}
 export interface Clue {
-  title: string;
-  description?: string;
-  text?: string;
+  title: TranslationNode;
+  description?: TranslationNode;
+  text?: TranslationNode;
   image?: {
     download?: string;
     src: string;
@@ -29,22 +34,22 @@ export interface Clue {
 }
 
 export interface Aid {
-  title: string;
-  messages: string[];
+  title: TranslationNode;
+  messages: Array<TranslationNode | string>;
 }
 
 export interface Level {
   firstLevel?: boolean;
   finalLevel?: boolean;
   slug: string;
-  title: string;
-  message: string;
-  success_title?: string;
-  success_message: string;
-  failure_title?: string;
-  failure_message: string;
-  solution_prompt: string;
-  solution: string;
+  title: TranslationNode;
+  message: TranslationNode;
+  success_title?: TranslationNode;
+  success_message: TranslationNode;
+  failure_title?: TranslationNode;
+  failure_message: TranslationNode;
+  solution_prompt: TranslationNode;
+  solution: TranslationNode;
   next_slug?: string;
   clues?: Array<Clue>;
   aids?: Array<Aid>;
@@ -61,8 +66,8 @@ export interface Link {
 
 export interface Game {
   slug: string;
-  name: string;
-  description: string;
+  name: TranslationNode;
+  description: TranslationNode;
   levels: Array<Level>;
   links: Array<Link>;
 }
@@ -70,8 +75,14 @@ export interface Game {
 export const games: Array<Game> = [
   {
     slug: "cl4551c",
-    name: "Classic",
-    description: "First exit game from prisma games.",
+    name: {
+      en: "Classic",
+      de: "Classic",
+    },
+    description: {
+      en: "First exit game from prisma games.",
+      de: "Erstes Exit-Spiel von Prisma-Games.",
+    },
     links: [
       {
         slug: "8170",
@@ -103,94 +114,188 @@ export const games: Array<Game> = [
       {
         firstLevel: true,
         slug: "w4rmup",
-        title: "Level 1",
-        message: `Greetings, brave souls. You've heeded our mysterious call and stepped into the unknown. How intriguing... You're not a random choice; every move, every secret, every talent you possess has been observed. 
+        title: {
+          en: "Level 1",
+          de: "Level 1",
+        },
+        message: {
+          en: `Greetings, brave souls. You've heeded our mysterious call and stepped into the unknown. How exciting... You're not a random choice; every move, every secret, every talent you possess has been observed. 
         
-        Now, let us unveil our identity: We are Prisma, the shadowy consortium operating from the unseen corners of the world. Only a select few are deemed worthy to join our ranks. Will your team rise to the occasion and prove its mettle? Can you navigate the twisted labyrinths and challenges we've meticulously designed for you, or will you crumble at the very start? Our faith in you is a gamble, and we eagerly await to see if it's well-placed. Embrace the journey, and may the odds be ever in your favor.`,
-        success_message:
-          "Ah, you've cracked the first code, but don't be too smug. That was merely a taste of what's to come. Prepare yourselves, for the true challenge lurks just around the corner. The depths of Prisma's puzzles have swallowed many before you. Will you be the next?",
-        failure_message:
-          "Hmm, stumbling so soon? Remember, that was just the simplest of riddles designed by the enigmatic minds of Prisma. Refocus and try again, for the path ahead is treacherous and will demand nothing but your best.",
-        solution_prompt: "Input Secret Code",
-        solution: "hello world",
+          Now, let us unveil our identity: We are Prisma, the shadowy consortium operating from the unseen corners of the world. Only a select few are deemed worthy to join our ranks. Will your team rise to the occasion and prove its mettle? Can you navigate the twisted labyrinths and challenges we've meticulously designed for you, or will you crumble at the very start? Our faith in you is a gamble, and we eagerly await to see if it's well-placed. Embrace the journey, and may the odds be ever in your favor.`,
+          de: `Seid gegrüßt, mutige Seelen. Ihr habt unserem mysteriösen Ruf Beachtung geschenkt und seid ins Unbekannte getreten. Wie aufregend... Ihr wurdet nicht zufällig ausgewählt; jede Bewegung, jedes Geheimnis, jedes Talent, das ihr besitzt, wurde beobachtet. 
+          
+          Nun lüften wir unsere Identität: Wir sind Prisma, das schattenhafte Konsortium, das aus den unsichtbaren Ecken der Welt operiert. Nur wenige werden als würdig erachtet, unseren Reihen beizutreten. Wird euer Team sich bewähren und seinen Mut beweisen? Könnt ihr die verdrehten Labyrinthe und Herausforderungen meistern, die wir sorgfältig für euch entworfen haben, oder werdet ihr gleich zu Beginn scheitern? Unser Glaube an euch ist eine Wette, und wir warten gespannt, ob sie gut platziert ist. Genießt die Reise und möge das Glück stets mit euch sein.`,
+        },
+        success_message: {
+          en: "Ah, you've cracked the first code, but don't be too smug. That was merely a taste of what's to come. Prepare yourselves, for the true challenge lurks just around the corner. The depths of Prisma's puzzles have swallowed many before you. Will you be the next?",
+          de: "Ah, ihr habt den ersten Code geknackt, aber seid nicht zu selbstgefällig. Das war nur ein Vorgeschmack auf das, was noch kommt. Bereitet euch vor, denn die wahre Herausforderung lauert gleich um die Ecke. Die Tiefen von Prismas Rätseln haben schon viele vor euch verschlungen. Werdet ihr die Nächsten sein?",
+        },
+        failure_message: {
+          en: "Hmm, stumbling so soon? Remember, that was just the simplest of riddles designed by the smart minds of Prisma. Refocus and try again, for the path ahead is treacherous and will demand nothing but your best.",
+          de: "Hmm, so früh gestolpert? Denkt daran, das war nur das einfachste der Rätsel, entworfen von den schlauen Köpfen von Prisma. Fokussiert euch erneut und versucht es noch einmal, denn der Weg vor euch ist trügerisch und verlangt nichts anderes als euer Bestes.",
+        },
+        solution_prompt: {
+          en: "Input Secret Code",
+          de: "Geheimcode eingeben",
+        },
+        solution: { en: "hello world", de: "hello world" },
         next_slug: "101",
         aids: [
           {
-            title: "The missing puzzle piece",
+            title: {
+              en: "The missing puzzle piece",
+              de: "Das fehlende Puzzleteil",
+            },
             messages: [
-              "Don't worry everything in the game has its purpose, at the very end of the journey you will understand everything.",
+              {
+                en: "Don't worry everything in the game has its purpose, at the very end of the journey you will understand everything.",
+                de: "Keine Sorge, alles im Spiel hat seinen Zweck, am Ende der Reise werdet ihr alles verstehen.",
+              },
             ],
           },
           {
-            title: "The UV lamp",
+            title: {
+              en: "The UV lamp",
+              de: "Die UV-Lampe",
+            },
             messages: [
-              "The UV lamp will help you to find hidden messages.",
-              "Use the UV lamp to reveal the hidden message on the puzzle.",
+              {
+                en: "The UV lamp will help you to find hidden messages.",
+                de: "Die UV-Lampe wird euch helfen, versteckte Nachrichten zu finden.",
+              },
+              {
+                en: "Use the UV lamp to reveal the hidden message on the puzzle.",
+                de: "Benutzt die UV-Lampe, um die versteckte Nachricht auf dem Puzzle zu enthüllen.",
+              },
             ],
           },
           {
-            title: "The puzzle",
+            title: {
+              en: "The puzzle",
+              de: "Das Rätsel",
+            },
             messages: [
-              "The puzzle contains a secret message not visible for the human eye.",
-              "Use the UV lamp to reveal the hidden message on the puzzle.",
+              {
+                en: "The puzzle contains a secret message not visible for the human eye.",
+                de: "Das Rätsel enthält eine geheime Botschaft, die für das menschliche Auge nicht sichtbar ist.",
+              },
+              {
+                en: "Use the UV lamp to reveal the hidden message on the puzzle.",
+                de: "Benutzt die UV-Lampe, um die versteckte Nachricht auf dem Puzzle zu enthüllen.",
+              },
             ],
           },
           {
-            title: "The four cards with colored borders",
+            title: {
+              en: "The four cards with colored borders",
+              de: "Die vier Karten mit farbigen Rändern",
+            },
             messages: [
-              "No worries, you will find out what to do with them later, you don't need them for this level.",
+              {
+                en: "No worries, you will find out what to do with them later, you don't need them for this level.",
+                de: "Keine Sorge, ihr werdet später herausfinden, was ihr damit anfangen sollt, ihr braucht sie nicht für diese Stufe.",
+              },
             ],
           },
         ],
       },
       {
         slug: "101",
-        title: "Level 2",
-        message:
-          "Welcome to Level Two! In front of you is a box with the number two on it. It might look simple, but pay close attention. There might be small clues here that will help you with bigger challenges later on. Ready to see what's inside?",
-        success_message:
-          "Good job! You figured out another of Prisma's puzzles. But don't get too comfortable. The clues you found here might be important later on. Remember everything you see and learn. Things might get trickier soon!",
-        failure_message:
-          "Oops! Made a mistake? It's okay. This level is still pretty simple. But remember, every clue counts. Take a moment, think again, and give it another try. Prisma's mysteries are waiting for you!",
-        solution_prompt: "Input Secret Code",
-        solution: "101011001",
+        title: {
+          en: "Level 2",
+          de: "Level 2",
+        },
+        message: {
+          en: "Welcome to Level Two! In front of you is a box with the number two on it. It might look simple, but pay close attention. There might be small clues here that will help you with bigger challenges later on. Ready to see what's inside?",
+          de: "Willkommen in Stufe Zwei! Vor dir steht eine Box mit der Nummer zwei darauf. Es mag einfach aussehen, aber sei Aufmerksam. Es könnte kleine Hinweise geben, die dir später bei größeren Herausforderungen helfen werden. Bist du bereit zu sehen, was drin ist?",
+        },
+        success_message: {
+          en: "Good job! You figured out another of Prisma's puzzles. But don't get too comfortable. The clues you found here might be important later on. Remember everything you see and learn. Things might get trickier soon!",
+          de: "Gut gemacht! Du hast ein weiteres von Prismas Rätseln gelöst. Aber werde nicht zu selbstsicher. Die Hinweise, die du hier gefunden hast, könnten später wichtig sein. Merke dir alles, was du siehst und lernst. Es könnte bald kniffliger werden!",
+        },
+        failure_message: {
+          en: "Oops! Made a mistake? It's okay. But remember, every clue counts. Take a moment, think again, and give it another try. Prisma's mysteries are waiting for you!",
+          de: "Ups! Einen Fehler gemacht? Das ist okay. Aber denke daran, jeder Hinweis zählt. Nimm dir einen Moment Zeit, denke noch einmal nach und versuche es erneut. Prismas Geheimnisse warten auf dich!",
+        },
+        solution_prompt: {
+          en: "Input Secret Code",
+          de: "Geheimcode eingeben",
+        },
+        solution: {
+          en: "101011001",
+          de: "101011001",
+        },
         next_slug: "r00m",
         clues: [
           {
-            title: "Whispers of the Dual Realm",
-            text: "In a world where the ancient pulse beats twice, discover the rhythm that dances between two steps. Can you decipher the song of zeros and ones?",
+            title: {
+              en: "Whispers of the Dual Realm",
+              de: "Flüstern der dualen Welt",
+            },
+            text: {
+              en: "In a world where the ancient pulse beats twice, discover the rhythm that dances between two steps. Can you decipher the song of zeros and ones?",
+              de: "In einer Welt, in der der alte Puls zweimal schlägt, entdecke den Rhythmus, der zwischen zwei Schritten tanzt. Kannst du das Lied aus Nullen und Einsen entschlüsseln?",
+            },
           },
           {
-            title: "Journey to the Digital Playground",
-            description:
-              "Seek guidance from the realms of youthful wonder, where complex riddles are made simple. Will the innocent wisdom enlighten your path?",
+            title: {
+              en: "Journey to the Digital Playground",
+              de: "Reise zum digitalen Spielfeld",
+            },
+            description: {
+              en: "Seek guidance from the realms of youthful wonder, where complex riddles are made simple. Will the innocent wisdom enlighten your path?",
+              de: "Suchen den Weg aus dem Reich des jugendlichen Staunens, wo komplexe Rätsel einfach gemacht werden. Wird die unschuldige Weisheit deinen Weg erhellen?",
+            },
             link: "https://www.wdrmaus.de/filme/sachgeschichten/bis_1023_zaehlen.php5",
           },
         ],
         aids: [
           {
-            title: "The card with the mysterious pattern",
+            title: {
+              en: "The card with the mysterious pattern",
+              de: "Die Karte mit dem geheimnisvollen Muster",
+            },
             messages: [
-              `Within a canvas vast and wide,
-            A secret tool does there reside.
-            Let your gaze soften, not direct,
-            For depth's illusion you must detect.
-            
-            The awl in hiding plays its part,
-            Seek with patience, open heart.
-            Unfocus eyes and then you'll see,
-            The hidden message, clear and free.`,
+              {
+                en: `Within a canvas vast and wide,
+A secret tool does there reside.
+Let your gaze soften, not direct,
+For depth's illusion you must detect.
+
+The awl in hiding plays its part,
+Seek with patience, open heart.
+Unfocus eyes and then you'll see,
+The hidden message, clear and free.`,
+                de: `In einer Leinwand, groß und weit,
+Verbirgt sich dort ein Geheimnis, bereit.
+Lass deinen Blick weichen, nicht starr,
+Denn Tiefenillusion wird dir klar.
+
+In der Verborgenheit spielt der Pfriem seine Rolle,
+Suche mit Geduld und in Gedanken keine Knolle.
+Spiele mit dem Blick, dann wirst du seh'n,
+Die Botschaft verborgen, wird vor dir steh'n.`,
+              },
               "https://en.wikipedia.org/wiki/Autostereogram",
             ],
           },
           {
-            title: "Binary Encoding",
+            title: {
+              en: "Binary Encoding",
+              de: "Binäre Kodierung",
+            },
             messages: ["https://letmegooglethat.com/?q=number+to+binary"],
           },
           {
-            title: "The mysterious foil",
+            title: {
+              en: "The mysterious foil",
+              de: "Die geheimnisvolle Folie",
+            },
             messages: [
-              "No worries, you will find out what to do with it later, you don't need it for this level.",
+              {
+                en: "No worries, you will find out what to do with it later, you don't need it for this level.",
+                de: "Keine Sorge, du wirst später herausfinden, was du damit machen sollst. Du brauchst es nicht für diese Stufe.",
+              },
             ],
           },
         ],
