@@ -92,13 +92,12 @@ export default async function GameLevel({
 export async function generateStaticParams({
   params,
 }: {
-  params: { locale: string; gameSlug: string; levelSlug: string };
+  params: { gameSlug: string; levelSlug: string };
 }) {
   const game = await getGame(params.gameSlug);
 
   return (
     game?.levels.map((level) => ({
-      locale: params.locale,
       gameSlug: params.gameSlug,
       levelSlug: level.slug,
     })) ?? []

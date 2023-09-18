@@ -96,11 +96,10 @@ export default async function Game({
   );
 }
 
-export async function generateStaticParams(params: { locale: string }) {
+export async function generateStaticParams() {
   const games: Array<Game> = await getAllGames();
 
   return games.map((game) => ({
-    locale: params.locale,
     gameSlug: game.slug,
   }));
 }
