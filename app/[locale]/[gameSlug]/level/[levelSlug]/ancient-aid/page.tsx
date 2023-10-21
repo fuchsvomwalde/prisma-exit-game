@@ -5,8 +5,6 @@ import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
 import { serverTranslation } from "@/i18n";
 
-export const dynamicParams = false;
-
 export default async function GameLevelAncientAid({
   params,
 }: {

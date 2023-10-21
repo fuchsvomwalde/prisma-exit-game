@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { NO_LEVEL } from "../../../api/_lib/constants";
 
-export const dynamicParams = false;
 export const runtime = "edge";
 
 export async function GET(

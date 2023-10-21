@@ -6,7 +6,6 @@ import {
 import { Game } from "@/app/api/_lib/model";
 import { NextResponse } from "next/server";
 
-export const dynamicParams = false;
 export const runtime = "edge";
 
 export async function GET(

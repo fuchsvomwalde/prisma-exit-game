@@ -13,8 +13,6 @@ const GameReward = dynamic(() => import("@/components/GameReward"), {
   ssr: false,
 });
 
-export const dynamicParams = false;
-
 export default async function GameLevelResult({
   params,
 }: {
