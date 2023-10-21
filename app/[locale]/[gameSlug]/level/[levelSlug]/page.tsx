@@ -8,6 +8,8 @@ import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
 import { serverTranslation } from "@/i18n";
 import messageLoader from "@/app/[locale]/_messages";
 
+export const dynamic = "force-dynamic";
+
 export default async function GameLevel({
   params,
 }: {

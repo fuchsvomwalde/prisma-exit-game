@@ -6,10 +6,12 @@ import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
 import { serverTranslation } from "@/i18n";
 import { getBlankLineByTitle, textToAsciArt } from "@/utils/asciiArt";
-import dynamic from "next/dynamic";
+import dynamicImport from "next/dynamic";
 import { cookies } from "next/headers";
 
-const GameReward = dynamic(() => import("@/components/GameReward"), {
+export const dynamic = "force-dynamic";
+
+const GameReward = dynamicImport(() => import("@/components/GameReward"), {
   ssr: false,
 });
 
