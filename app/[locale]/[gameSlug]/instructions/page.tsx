@@ -6,6 +6,8 @@ import getGameState from "../_utils/useGameState";
 import { serverTranslation } from "@/i18n";
 import messageLoader from "../../_messages";
 
+export const dynamic = "force-dynamic";
+
 export default async function GameInstructions({
   params,
 }: {
