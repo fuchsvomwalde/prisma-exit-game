@@ -1,3 +1,85 @@
 {
-  "welcomeTo": "Welcome to"
+  "welcomeTo": "Welcome to",
+  "madeBy": "by",
+  "theExitGame": "the exit game",
+  "navigation": {
+    "start": {
+      "title": "Start game",
+      "description": "Start game as soon as you are ready."
+    },
+    "continue": {
+      "title": "Continue",
+      "description": "Continue where you left."
+    },
+    "reset": {
+      "title": "Reset",
+      "description": "Reset the game."
+    },
+    "rules": {
+      "title": "Rules",
+      "description": "Read the rules."
+    }
+  },
+  "instructions": {
+    "title": "Rules",
+    "navigation": {
+      "back": {
+        "title": "Back",
+        "description": "Go back to main menu."
+      }
+    },
+    "content": "Welcome to Prisma. This is an exit game based on a true story. If you want to know all the secrets about the background, you have to pass all the levels and enter the final solution word. The rules of the game are simple. You have to complete all the levels in the shortest possible time and enter the correct solution word for each level on this website to succeed. The website will tell you if the solution word was right or wrong.\n\nIn your room there is a suitcase, in this suitcase there are more boxes, each box represents another level (marked by a black and white number). You can open the box with the next level only after solving the previous level. \n1. CARDS: In each box (or level) you will find cards marked with red letters. For each level there is at least one card with a QR code that directs you to further clues and help on the web. \n2. AIDS: From level to level you also collect aids. Not all cards and aids are always needed directly, some you need to save for later, expect the unexpected.\n3. HELP: If you need help or tips and the hints on cards and on the web are not enough, the game master is available to answer your questions.\n4. IMPORTANT: In addition to the tools provided, you will also need a working smartphone with an internet connection (and maybe more equipment). It may also be helpful to have a pen and paper ready to take notes.\n5. THE GAME BEGINS: What are you waiting for? Start the game and complete all the levels to crack the secret behind Prisma!"
+  },
+  "level": {
+    "submit": "Submit",
+    "navigation": {
+      "back": {
+        "title": "Back",
+        "description": "Go back to main menu."
+      },
+      "backToLevel": {
+        "title": "Return to the Nexus",
+        "description": "Step back into the realm of choices. Enter the sacred words and determine your destiny."
+      },
+      "clues": {
+        "title": "Unearth Clues",
+        "description": "Dive into the world of mysteries and discover the secrets needed to progress."
+      },
+      "aids": {
+        "title": "Seek Guidance",
+        "description": "Lost in the enigma? Gain insights, but aware, spoilers ahead."
+      },
+      "retry": {
+        "title": "Retry",
+        "description": "Back to reenter solution."
+      },
+      "next": {
+        "title": "Next level",
+        "description": "Move on to the next level."
+      }
+    },
+    "clueInfo": {
+      "title": "Info",
+      "subtitle": "The Enchanted Empty",
+      "description": "You have ventured into an uncharted domain where riddles and hints are yet to be born. Tread lightly, and perhaps the mysteries of this realm will unfold before you in due time."
+    },
+    "aidInfo": {
+      "title": "Info",
+      "subtitle": "The Void of Silence",
+      "description": "In this ancient space, guidance is veiled in shadows. For now, trust your instincts and navigate with the wisdom you already possess. The cosmos will unveil its guidance when the time is right."
+    },
+    "spoilerWarning": {
+      "title": "Warning",
+      "subtitle": "Spoiler Warning: Proceed with Caution!",
+      "description": "In the shadowy realms of this digital odyssey, assistance is coded. While we've restrained the omnipotent hints that could decrypt all, know they exist. Should you find yourself lost within this cyber maze, revisit the overlooked data fragments. But BEWARE: Initiate the search codes only if truly trapped - for hacking the game's matrix with these keys diminishes the thrill of the conquest."
+    }
+  },
+  "protectedLink": {
+    "title": "Link is password protected",
+    "error": {
+      "title": "Access Denied!",
+      "description": "Entered password is not correct."
+    },
+    "submit": "Submit"
+  }
 }

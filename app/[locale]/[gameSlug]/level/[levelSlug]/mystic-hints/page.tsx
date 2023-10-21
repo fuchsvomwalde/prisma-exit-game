@@ -1,15 +1,22 @@
+import messageLoader from "@/app/[locale]/_messages";
 import { getLevelBySlug } from "@/app/api/_lib/actions";
 import ClueCard from "@/components/ClueCard";
 import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
+import { serverTranslation } from "@/i18n";
 import { cookies } from "next/headers";
 
 export default async function GameLevelMysticHints({
   params,
 }: {
-  params: { gameSlug: string; levelSlug: string };
+  params: { gameSlug: string; levelSlug: string; locale: string };
 }) {
-  const level = await getLevelBySlug(params.gameSlug, params.levelSlug);
+  const { t } = await serverTranslation(messageLoader, params.locale);
+  const level = await getLevelBySlug(
+    params.gameSlug,
+    params.levelSlug,
+    params.locale
+  );
 
   const cookieStore = cookies();
   const passedLevel = cookieStore.get(params.gameSlug)?.value ?? "";
@@ -18,12 +25,12 @@ export default async function GameLevelMysticHints({
 
   return (
     <Terminal variant="default">
-      <main className="flex min-h-screen flex-col items-center justify-start p-8 lg:p-24">
+      <main className="flex min-h-[calc(100vh-83px)] flex-col items-center justify-start p-8 lg:p-24">
         <div className="lg:max-w-5xl mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
           <NavTile
             href={`/${params.gameSlug}/level/${params.levelSlug}`}
-            title="Return to the Nexus"
-            subline={`Step back into the realm of choices. Enter the sacred words and determine your destiny.`}
+            title={t("level.navigation.backToLevel.title")}
+            subline={t("level.navigation.backToLevel.description")}
             back
           />
         </div>
@@ -43,12 +50,12 @@ export default async function GameLevelMysticHints({
               >
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
               </svg>
-              <span className="sr-only">Info</span>
+              <span className="sr-only">{t("level.clueInfo.title")}</span>
               <div className="text-left">
-                <span className="font-medium">The Enchanted Empty</span> You
-                have ventured into an uncharted domain where riddles and hints
-                are yet to be born. Tread lightly, and perhaps the mysteries of
-                this realm will unfold before you in due time.
+                <span className="font-medium">
+                  {t("level.clueInfo.subtitle")}
+                </span>{" "}
+                {t("level.clueInfo.description")}
               </div>
             </div>
           )}

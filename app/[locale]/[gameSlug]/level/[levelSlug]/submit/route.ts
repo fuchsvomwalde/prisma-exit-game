@@ -10,13 +10,17 @@ export async function GET(
   {
     params,
   }: {
-    params: { gameSlug: string; levelSlug: string };
+    params: { gameSlug: string; levelSlug: string; locale: string };
   }
 ) {
   const { searchParams } = new URL(request.url);
   const passcode = searchParams.get(FORM_DATA_LEVEL_SUBMIT_PASSCODE);
 
-  const currentLevel = await getLevelBySlug(params.gameSlug, params.levelSlug);
+  const currentLevel = await getLevelBySlug(
+    params.gameSlug,
+    params.levelSlug,
+    params.locale
+  );
 
   if (`${passcode}`?.trim()?.toLowerCase() === currentLevel?.solution) {
     const response = NextResponse.redirect(
@@ -40,7 +44,8 @@ export async function GET(
   );
   const previousLevel = await getLevelByNextSlug(
     params.gameSlug,
-    params.levelSlug
+    params.levelSlug,
+    params.locale
   );
 
   // here we write a http-only cookie :D

@@ -35,11 +35,16 @@ export function middleware(request: NextRequest) {
 
   const locale = _getLangByReq(request);
 
-  //   console.log("locale", {
-  //     cookie: acceptLanguage.get(request?.cookies?.get(cookieName)?.value),
-  //     acceptLanguage: acceptLanguage.get(request.headers.get("Accept-Language")),
-  //     fallbackLocale,
-  //   });
+  // store current request url in a custom header, which you can read later
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-url", request.url);
+
+  // console.log("locale", {
+  //   locale,
+  //   cookie: acceptLanguage.get(request?.cookies?.get(cookieName)?.value),
+  //   acceptLanguage: acceptLanguage.get(request.headers.get("Accept-Language")),
+  //   fallbackLocale,
+  // });
 
   // redirect if locale in path is not supported
   if (
@@ -48,13 +53,18 @@ export function middleware(request: NextRequest) {
     ) &&
     !request.nextUrl.pathname.startsWith("/_next")
   ) {
+    // console.log(
+    //   " 👉 redirect to:",
+    //   `/${locale}${request.nextUrl.pathname}${request.nextUrl.search}`
+    // );
     return NextResponse.redirect(
       new URL(
-        request.nextUrl.search
-          ? `/${locale}${request.nextUrl.pathname}${request.nextUrl.search}`
-          : `/${locale}${request.nextUrl.pathname}`,
+        `/${locale}${request.nextUrl.pathname}${request.nextUrl.search}`,
         request.url
-      )
+      ),
+      {
+        headers: requestHeaders,
+      }
     );
   }
 
@@ -63,7 +73,11 @@ export function middleware(request: NextRequest) {
     const localeInReferer = locales.find((locale) =>
       refererUrl.pathname.startsWith(`/${locale}`)
     );
-    const response = NextResponse.next();
+    const response = NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
     if (localeInReferer) response.cookies.set(cookieName, localeInReferer);
     return response;
   }

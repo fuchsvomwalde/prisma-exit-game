@@ -8,12 +8,16 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { gameSlug: string; linkSlug: string } }
+  { params }: { params: { gameSlug: string; linkSlug: string; locale: string } }
 ) {
   const { searchParams } = new URL(request.url);
   const password = searchParams.get(FORM_DATA_LINK_PASSWORD);
 
-  const goToLink = await getLinkBySlug(params.gameSlug, params.linkSlug);
+  const goToLink = await getLinkBySlug(
+    params.gameSlug,
+    params.linkSlug,
+    params.locale
+  );
 
   try {
     const isPasswordProtected = Boolean(goToLink?.password);
@@ -45,8 +49,12 @@ export async function GET(
   }
 }
 
-export async function generateStaticParams() {
-  const games: Array<Game> = await getAllGames();
+export async function generateStaticParams({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const games: Array<Game> = await getAllGames(params.locale);
 
   return games
     .map((game) =>

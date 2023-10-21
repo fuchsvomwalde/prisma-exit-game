@@ -22,7 +22,17 @@ export default function NavTile({
       <h2 className={`mb-3 text-2xl font-mono font-semibold`}>
         {back && (
           <span className="inline-block transition-transform group-hover:-translate-x-1 motion-reduce:transform-none">
-            {!customIcon && <>&lt;-</>}
+            {!customIcon && (
+              <svg
+                className="w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <title>arrow-left</title>
+                <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+              </svg>
+            )}
             {customIcon}
           </span>
         )}
@@ -31,7 +41,17 @@ export default function NavTile({
         {!back && " "}
         {!back && (
           <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-            {!customIcon && <>-&gt;</>}
+            {!customIcon && (
+              <svg
+                className="w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <title>arrow-right</title>
+                <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
+              </svg>
+            )}
             {customIcon}
           </span>
         )}

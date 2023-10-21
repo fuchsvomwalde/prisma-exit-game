@@ -4,14 +4,18 @@ import Image from "next/image";
 import { getAllGames } from "../../api/_lib/actions";
 import { Game } from "../../api/_lib/model";
 import getGameState from "./_utils/useGameState";
+import { serverTranslation } from "@/i18n";
+import messageLoader from "../_messages";
 
 export default async function Game({
   params,
 }: {
-  params: { gameSlug: string };
+  params: { gameSlug: string; locale: string };
 }) {
+  const { t } = await serverTranslation(messageLoader, params.locale);
   const { passedAnyLevel, passedLevel, firstLevel } = await getGameState(
-    params.gameSlug
+    params.gameSlug,
+    params.locale
   );
 
   const terminalVariant =
@@ -19,31 +23,13 @@ export default async function Game({
 
   return (
     <Terminal variant={terminalVariant}>
-      <main className="flex min-h-screen flex-col items-center justify-between p-8 lg:p-24">
+      <main className="flex min-h-[calc(100vh-83px)] flex-col items-center justify-between p-8 lg:p-24">
         <div className="z-10 lg:max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
           <p className="whitespace-nowrap p-4 left-0 top-0 flex w-full justify-center dark:border-neutral-800 lg:static lg:w-auto lg:rounded-xl">
-            Welcome to&nbsp;
-            <code className="font-mono font-bold">Prisma</code>&nbsp;the exit
-            game.
+            {t("welcomeTo")}&nbsp;
+            <code className="font-mono font-bold">Prisma</code>&nbsp;
+            {t("theExitGame")}.
           </p>
-          <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center lg:static lg:h-auto lg:w-auto lg:bg-none">
-            <a
-              className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-              // href=""
-              // target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{" "}
-              <Image
-                src="/prisma.svg"
-                alt="Prisma Logo"
-                className="dark:invert"
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
         </div>
 
         <div className="relative pointer-events-none flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[1]">
@@ -63,8 +49,8 @@ export default async function Game({
           {!passedAnyLevel && (
             <NavTile
               href={`/${params.gameSlug}/level/${firstLevel?.slug}`}
-              title="Start game"
-              subline="Start game as soon as you are ready."
+              title={t("navigation.start.title")}
+              subline={t("navigation.start.description")}
             />
           )}
           {passedAnyLevel && (
@@ -74,21 +60,21 @@ export default async function Game({
                   ? `/${params.gameSlug}/level/${passedLevel?.next_slug}`
                   : `/${params.gameSlug}/level/${passedLevel?.slug}/result`
               }
-              title="Continue"
-              subline="Continue where you left."
+              title={t("navigation.continue.title")}
+              subline={t("navigation.continue.description")}
             />
           )}
           {passedAnyLevel && (
             <NavTile
               href={`/${params.gameSlug}/reset`}
-              title="Reset game"
-              subline="Start from the beginning."
+              title={t("navigation.reset.title")}
+              subline={t("navigation.reset.description")}
             />
           )}
           <NavTile
             href={`/${params.gameSlug}/instructions`}
-            title="Game rules"
-            subline="Read the rules of the game here."
+            title={t("navigation.rules.title")}
+            subline={t("navigation.rules.description")}
           />
         </div>
       </main>
@@ -96,8 +82,12 @@ export default async function Game({
   );
 }
 
-export async function generateStaticParams() {
-  const games: Array<Game> = await getAllGames();
+export async function generateStaticParams({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const games: Array<Game> = await getAllGames(params.locale);
 
   return games.map((game) => ({
     gameSlug: game.slug,

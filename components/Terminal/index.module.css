@@ -11,6 +11,8 @@
 
 /* glow */
 .terminal {
+  /* 82px is the height of the header navbar */
+  padding-top: 83px;
   height: 100vh;
   text-shadow: 0 0.2rem 1rem #1d4ed8;
   overflow-y: auto;

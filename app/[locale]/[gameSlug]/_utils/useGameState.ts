@@ -4,13 +4,13 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import "server-only";
 
-export default async function getGameState(gameSlug: string) {
+export default async function getGameState(gameSlug: string, locale: string) {
   const cookieStore = cookies();
   const passedLevelSlug = cookieStore.get(gameSlug)?.value ?? "";
   const passedAnyLevel = passedLevelSlug && passedLevelSlug !== NO_LEVEL;
-  const game = await getGame(gameSlug);
-  const passedLevel = await getLevelBySlug(gameSlug, passedLevelSlug);
-  const firstLevel = await getFirstLevel(gameSlug);
+  const game = await getGame(gameSlug, locale);
+  const passedLevel = await getLevelBySlug(gameSlug, passedLevelSlug, locale);
+  const firstLevel = await getFirstLevel(gameSlug, locale);
 
   if (!game) {
     notFound();

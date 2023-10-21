@@ -1,15 +1,18 @@
 import { StaticImageData } from "next/image";
 import "server-only";
 
-export interface TranslationNode {
+export type SingleLanguage = string;
+export interface MultiLanguage {
   de: string;
   en: string;
   [key: string]: string;
 }
-export interface Clue {
-  title: TranslationNode;
-  description?: TranslationNode;
-  text?: TranslationNode;
+export interface Clue<
+  T extends SingleLanguage | MultiLanguage = SingleLanguage
+> {
+  title: T;
+  description?: T;
+  text?: T;
   image?: {
     download?: string;
     src: string;
@@ -33,46 +36,49 @@ export interface Clue {
   link?: string;
 }
 
-export interface Aid {
-  title: TranslationNode;
-  messages: Array<TranslationNode>;
+export interface Aid<
+  T extends SingleLanguage | MultiLanguage = SingleLanguage
+> {
+  title: T;
+  messages: Array<T>;
 }
 
-export interface Level {
+export interface Level<
+  T extends SingleLanguage | MultiLanguage = SingleLanguage
+> {
   firstLevel?: boolean;
   finalLevel?: boolean;
   slug: string;
-  title: TranslationNode;
-  message: TranslationNode;
-  success_title?: TranslationNode;
-  success_message: TranslationNode;
-  failure_title?: TranslationNode;
-  failure_message: TranslationNode;
-  solution_prompt: TranslationNode;
-  solution: TranslationNode;
+  title: T;
+  message: T;
+  success_title?: T;
+  success_message: T;
+  failure_title?: T;
+  failure_message: T;
+  solution_prompt: T;
+  solution: T;
   next_slug?: string;
-  clues?: Array<Clue>;
-  aids?: Array<Aid>;
+  clues?: Array<Clue<T>>;
+  aids?: Array<Aid<T>>;
 }
 
 export interface Link {
   slug: string;
   href: string;
-  /**
-   * TODO: add password protection
-   */
   password?: string;
 }
 
-export interface Game {
+export interface Game<
+  T extends SingleLanguage | MultiLanguage = SingleLanguage
+> {
   slug: string;
-  name: TranslationNode;
-  description: TranslationNode;
-  levels: Array<Level>;
+  name: T;
+  description: T;
+  levels: Array<Level<T>>;
   links: Array<Link>;
 }
 
-export const games: Array<Game> = [
+export const games: Array<Game<MultiLanguage>> = [
   {
     slug: "cl4551c",
     name: {

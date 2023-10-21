@@ -1,3 +1,85 @@
 {
-  "welcomeTo": "Willkommen bei"
+  "welcomeTo": "Willkommen bei",
+  "madeBy": "von",
+  "theExitGame": "dem Exit-Spiel",
+  "navigation": {
+    "start": {
+      "title": "Spiel starten",
+      "description": "Starte das Spiel, sobald du bereit bist."
+    },
+    "continue": {
+      "title": "Fortfahren",
+      "description": "Mach da weiter, wo du aufgehört hast."
+    },
+    "reset": {
+      "title": "Zurücksetzen",
+      "description": "Setze das Spiel zurück."
+    },
+    "rules": {
+      "title": "Regeln",
+      "description": "Lies die Spielregeln."
+    }
+  },
+  "instructions": {
+    "title": "Regeln",
+    "navigation": {
+      "back": {
+        "title": "Zurück",
+        "description": "Geh zurück zum Hauptmenü."
+      }
+    },
+    "content": "Willkommen bei Prisma. Dies ist ein Exit-Spiel basierend auf einer wahren Geschichte. Wenn du alle Geheimnisse über den Hintergrund wissen möchtest, musst du alle Level bestehen und das finale Lösungswort eingeben. Die Spielregeln sind einfach. Du musst alle Level in der kürzestmöglichen Zeit abschließen und das richtige Lösungswort für jedes Level auf dieser Webseite eingeben, um erfolgreich zu sein. Die Webseite wird dir sagen, ob das Lösungswort richtig oder falsch war.\n\nIn deinem Raum gibt es einen Koffer, in diesem Koffer sind weitere Boxen, jede Box stellt ein anderes Level dar (gekennzeichnet durch eine schwarz-weiße Nummer). Du kannst die Box mit dem nächsten Level erst öffnen, nachdem du das vorherige Level gelöst hast. \n\n1. KARTEN: In jeder Box (oder Level) findest du Karten mit roten Buchstaben markiert. Für jedes Level gibt es mindestens eine Karte mit einem QR-Code, der dich zu weiteren Hinweisen und Hilfe im Web führt. \n\n2. HILFSMITTEL: Von Level zu Level sammelst du auch Hilfsmittel. Nicht alle Karten und Hilfsmittel werden immer direkt benötigt, einige musst du für später aufheben, erwarte das Unerwartete.\n\n3. HILFE: Wenn du Hilfe oder Tipps benötigst und die Hinweise auf den Karten und im Web nicht ausreichen, steht der Spielleiter zur Verfügung, um deine Fragen zu beantworten.\n\n4. WICHTIG: Zusätzlich zu den bereitgestellten Werkzeugen benötigst du auch ein funktionierendes Smartphone mit Internetverbindung (und vielleicht mehr Ausrüstung). Es könnte auch hilfreich sein, Stift und Papier bereitzuhalten, um Notizen zu machen.\n\n5. DAS SPIEL BEGINNT: Worauf wartest du noch? Starte das Spiel und schließe alle Level ab, um das Geheimnis hinter Prisma zu lüften!"
+  },
+  "level": {
+    "submit": "Einreichen",
+    "navigation": {
+      "back": {
+        "title": "Zurück",
+        "description": "Geh zurück zum Hauptmenü."
+      },
+      "backToLevel": {
+        "title": "Zurück zum Nexus",
+        "description": "Tritt zurück ins Reich der Entscheidungen. Gib die heiligen Worte ein und bestimme dein Schicksal."
+      },
+      "clues": {
+        "title": "Hinweise finden",
+        "description": "Tauche ein in die Welt der Geheimnisse und entdecke die zur Fortsetzung benötigten Geheimnisse."
+      },
+      "aids": {
+        "title": "Hilfe suchen",
+        "description": "Im Rätsel verloren? Hole dir Einsichten, aber Vorsicht, Spoiler voraus!"
+      },
+      "retry": {
+        "title": "Erneut versuchen",
+        "description": "Zurück um die Lösung erneut einzugeben."
+      },
+      "next": {
+        "title": "Nächstes Level",
+        "description": "Weiter zum nächsten Level."
+      }
+    },
+    "clueInfo": {
+      "title": "Info",
+      "subtitle": "Der Verzauberte Leerraum",
+      "description": "Du bist in ein unerforschtes Gebiet vorgedrungen, in dem Rätsel und Hinweise noch geboren werden müssen. Geh behutsam vor, und vielleicht werden sich die Geheimnisse dieses Reiches dir rechtzeitig offenbaren."
+    },
+    "aidInfo": {
+      "title": "Info",
+      "subtitle": "Der Schweigende Raum",
+      "description": "In diesem alten Raum ist die Führung in Schatten gehüllt. Vertraue vorerst auf deine Instinkte und navigiere mit der Weisheit, die du bereits besitzt. Das Universum wird seine Führung enthüllen, wenn die Zeit reif ist."
+    },
+    "spoilerWarning": {
+      "title": "Warnung",
+      "subtitle": "Spoiler-Warnung: Vorsicht!",
+      "description": "In den schattigen Reichen dieser digitalen Odyssee ist Hilfe codiert. Obwohl wir die allmächtigen Hinweise, die alles entschlüsseln könnten, zurückgehalten haben, wissen wir, dass sie existieren. Solltest du dich in diesem Cyber-Labyrinth verirren, sieh dir die übersehenen Datenfragmente erneut an. Aber VORSICHT: Starte die Suchcodes nur, wenn du wirklich feststeckst - denn das Hacken der Spielmatrix mit diesen Schlüsseln mindert den Reiz der Eroberung."
+    }
+  },
+  "protectedLink": {
+    "title": "Link ist passwortgeschützt",
+    "error": {
+      "title": "Zugriff verweigert!",
+      "description": "Eingegebenes Passwort ist nicht korrekt."
+    },
+    "submit": "Einreichen"
+  }
 }
