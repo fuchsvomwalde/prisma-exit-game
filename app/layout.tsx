@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { headers } from "next/headers";
+import pkg from "../package.json";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,21 +42,26 @@ export default function RootLayout({
       <body className={`${inter.className} overflow-hidden`}>
         <nav className="z-50 backdrop-blur-md bg-white/30 bg-white dark:bg-black/30 fixed w-full top-0 left-0 border-b border-black/10 dark:border-white/10">
           <div className="max-w-5xl flex flex-wrap items-center justify-between mx-auto p-4 lg:px-0">
-            <a
-              className="flex place-items-center gap-2 p-0 lg:pointer-events-auto"
-              href="/"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src="/prisma.svg"
-                alt="Prisma Logo"
-                className="dark:invert"
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-            <div className="flex md:order-2">
+            <div className="flex gap-2 items-center">
+              <a
+                className="flex place-items-center gap-2 p-0 lg:pointer-events-auto"
+                href="/"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/prisma.svg"
+                  alt="Prisma Logo"
+                  className="dark:invert"
+                  width={100}
+                  height={24}
+                  priority
+                />
+              </a>
+              <span className="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
+                v{pkg.version}
+              </span>
+            </div>
+            <div className="flex items-center">
               <form action={`/api/set-locale`} method="get">
                 <input type="hidden" name={cookieName} value={opponentLocale} />
                 <button
