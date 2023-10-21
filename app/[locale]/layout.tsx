@@ -1,6 +1,6 @@
 "use client";
 
-import { cookieName, locales } from "@/i18n/settings";
+import { cookieName, fallbackLocale, locales } from "@/i18n/settings";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import pkg from "../../package.json";
@@ -14,9 +14,8 @@ function getLocaleFromPathname(pathname: string) {
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const locale = getLocaleFromPathname(pathname);
+  const locale = getLocaleFromPathname(pathname) ?? fallbackLocale;
   const opponentLocale = locale === "de" ? "en" : "de";
-
   return (
     <>
       <nav className="z-50 backdrop-blur-md bg-white/30 bg-white dark:bg-black/30 fixed w-full top-0 left-0 border-b border-black/10 dark:border-white/10">

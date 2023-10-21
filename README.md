@@ -23,9 +23,11 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ### IMPORTANT
 
 - [ ] add i18n multi language model
-  - [ ] add language switch to global app bar
-  - [ ] translate all languages
-  - [ ] update html lang attribute on locale change
+  - [x] add language switch to global app bar
+  - [x] translate all languages
+  - [x] update html lang attribute on locale change
+  - [ ] AidAccordion and ClueCard are missing translations
+  - [ ] locale gets gesetted on navigation
 - [ ] get video streaming to work on iPhone/mobile (byte range support)
 - [ ] check why mp4 can not be played in iOS
 - [ ] protect access of future levels by checking cookie

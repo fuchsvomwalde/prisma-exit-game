@@ -3,6 +3,8 @@ import { NO_LEVEL } from "../../../api/_lib/constants";
 
 export const runtime = "edge";
 
+const oneYear = 1000 * 60 * 60 * 24 * 365;
+
 export async function GET(
   request: Request,
   {
@@ -19,6 +21,7 @@ export async function GET(
   response.cookies.set(params.gameSlug, NO_LEVEL, {
     httpOnly: true,
     sameSite: "lax",
+    expires: new Date(Date.now() + oneYear),
   });
 
   return response;

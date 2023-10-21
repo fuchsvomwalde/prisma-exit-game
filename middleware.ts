@@ -4,6 +4,8 @@ import { fallbackLocale, locales, cookieName } from "@/i18n/settings";
 
 acceptLanguage.languages(locales);
 
+const oneYear = 1000 * 60 * 60 * 24 * 365;
+
 export const config = {
   matcher: [
     /*
@@ -29,7 +31,8 @@ const _getLangByReq = (request: NextRequest) => {
 export function middleware(request: NextRequest) {
   if (
     request.nextUrl.pathname.indexOf("icon") > -1 ||
-    request.nextUrl.pathname.indexOf("chrome") > -1
+    request.nextUrl.pathname.indexOf("chrome") > -1 ||
+    request.nextUrl.pathname === "/api/set-locale"
   )
     return NextResponse.next();
 
@@ -39,47 +42,28 @@ export function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-url", request.url);
 
-  // console.log("locale", {
-  //   locale,
-  //   cookie: acceptLanguage.get(request?.cookies?.get(cookieName)?.value),
-  //   acceptLanguage: acceptLanguage.get(request.headers.get("Accept-Language")),
-  //   fallbackLocale,
-  // });
-
   // redirect if locale in path is not supported
   if (
-    !locales.some((locale) =>
-      request.nextUrl.pathname.startsWith(`/${locale}`)
-    ) &&
+    locales.includes(locale) &&
+    !request.nextUrl.pathname.startsWith(`/${locale}`) &&
     !request.nextUrl.pathname.startsWith("/_next")
   ) {
-    // console.log(
-    //   " 👉 redirect to:",
-    //   `/${locale}${request.nextUrl.pathname}${request.nextUrl.search}`
-    // );
+    // check if local is missing icn existing url
+    const pathnameHasLocale = locales.some((locale) =>
+      request.nextUrl.pathname.startsWith(`/${locale}`)
+    );
+    const pathnameWithoutLocale = pathnameHasLocale
+      ? request.nextUrl.pathname.replace(/^\/[a-z]{2}/, "")
+      : request.nextUrl.pathname;
     return NextResponse.redirect(
       new URL(
-        `/${locale}${request.nextUrl.pathname}${request.nextUrl.search}`,
+        `/${locale}${pathnameWithoutLocale}${request.nextUrl.search}`,
         request.url
       ),
       {
         headers: requestHeaders,
       }
     );
-  }
-
-  if (request.headers.has("referer")) {
-    const refererUrl = new URL(request?.headers?.get("referer") ?? "");
-    const localeInReferer = locales.find((locale) =>
-      refererUrl.pathname.startsWith(`/${locale}`)
-    );
-    const response = NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-    if (localeInReferer) response.cookies.set(cookieName, localeInReferer);
-    return response;
   }
 
   return NextResponse.next();
