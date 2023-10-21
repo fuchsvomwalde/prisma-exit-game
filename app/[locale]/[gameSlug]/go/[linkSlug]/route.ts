@@ -6,6 +6,9 @@ import {
 import { Game } from "@/app/api/_lib/model";
 import { NextResponse } from "next/server";
 
+export const dynamicParams = false;
+export const runtime = "edge";
+
 export async function GET(
   request: Request,
   { params }: { params: { gameSlug: string; linkSlug: string; locale: string } }
@@ -65,9 +68,3 @@ export async function generateStaticParams({
     )
     .flat();
 }
-
-/**
- * important: we have to set the runtime paramter in order to get the route work in production
- */
-export const dynamicParams = false;
-export const runtime = "edge";

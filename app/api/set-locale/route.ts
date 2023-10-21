@@ -4,6 +4,9 @@ import acceptLanguage from "accept-language";
 
 acceptLanguage.languages(locales);
 
+export const dynamicParams = false;
+export const runtime = "edge";
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const newLocale = searchParams.get(cookieName);
@@ -33,5 +36,3 @@ export async function GET(request: NextRequest) {
   // redirect back to referer, if locale switch is not supported
   return NextResponse.redirect(new URL(referer));
 }
-
-export const dynamicParams = false;
