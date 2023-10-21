@@ -1,7 +1,7 @@
 import NavTile from "@/components/NavTile";
 import Terminal from "@/components/Terminal";
 import { serverTranslation } from "@/i18n";
-import { cookieName, locales } from "@/i18n/settings";
+import { locales } from "@/i18n/settings";
 import Image from "next/image";
 import { getAllGames } from "../api/_lib/actions";
 import { Game } from "../api/_lib/model";
@@ -49,6 +49,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
   );
 }
 
+// this will not apply for the layout but for all subpages
 export async function generateStaticParams() {
   return (
     locales.map((locale) => ({

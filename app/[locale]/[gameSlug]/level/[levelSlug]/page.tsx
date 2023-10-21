@@ -105,8 +105,8 @@ export async function generateStaticParams({
 
   return (
     game?.levels.map((level) => ({
-      locale: params.locale,
-      gameSlug: params.gameSlug,
+      // locale: params.locale,
+      // gameSlug: params.gameSlug,
       levelSlug: level.slug,
     })) ?? []
   );

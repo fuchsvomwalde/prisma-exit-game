@@ -4,7 +4,6 @@ import acceptLanguage from "accept-language";
 
 acceptLanguage.languages(locales);
 
-export const dynamicParams = false;
 export const runtime = "edge";
 
 export async function GET(request: NextRequest) {

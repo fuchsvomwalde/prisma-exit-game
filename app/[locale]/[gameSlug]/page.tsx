@@ -90,7 +90,7 @@ export async function generateStaticParams({
   const games: Array<Game> = await getAllGames(params.locale);
 
   return games.map((game) => ({
-    locale: params.locale,
+    // locale: params.locale,
     gameSlug: game.slug,
   }));
 }
