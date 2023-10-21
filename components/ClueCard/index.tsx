@@ -34,6 +34,7 @@ function ClueCardContent({ clue }: ClueCardProps) {
         href={clue?.link}
         target="_blank"
         className="inline-flex items-center text-blue-600 hover:underline"
+        rel="noreferrer noopener"
       >
         Reveal
         <svg

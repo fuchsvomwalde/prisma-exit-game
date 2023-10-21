@@ -395,6 +395,13 @@ Wird der Schlüssel sein, der lässt dich hinein.`,
               ],
             },
           },
+          {
+            title: {
+              en: "Ready to enter the r00m? (for Safari & iOS)",
+              de: "Bereit, den Raum zu betreten? (für Safari & iOS)",
+            },
+            link: "https://youtu.be/aekfPU0SwNw",
+          },
         ],
         aids: [
           {
