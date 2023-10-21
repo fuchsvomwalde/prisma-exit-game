@@ -5,7 +5,6 @@ import {
 } from "@/app/api/_lib/constants";
 import { NextResponse } from "next/server";
 
-export const dynamicParams = false;
 export const runtime = "edge";
 
 export async function GET(

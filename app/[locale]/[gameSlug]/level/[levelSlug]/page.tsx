@@ -99,7 +99,7 @@ export default async function GameLevel({
 export async function generateStaticParams({
   params,
 }: {
-  params: { gameSlug: string; levelSlug: string; locale: string };
+  params: { gameSlug: string; locale: string };
 }) {
   const game = await getGame(params.gameSlug, params.locale);
 
