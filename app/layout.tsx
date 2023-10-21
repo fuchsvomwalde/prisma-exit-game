@@ -88,3 +88,12 @@ export default function RootLayout({
     </html>
   );
 }
+
+// this will not apply for the layout but for all subpages
+export async function generateStaticParams() {
+  return (
+    locales.map((locale) => ({
+      locale: locale,
+    })) ?? []
+  );
+}
