@@ -6,6 +6,8 @@ import Terminal from "@/components/Terminal";
 import { serverTranslation } from "@/i18n";
 import { cookies } from "next/headers";
 
+export const dynamicParams = false;
+
 export default async function GameLevelMysticHints({
   params,
 }: {
@@ -70,5 +72,3 @@ export default async function GameLevelMysticHints({
     </Terminal>
   );
 }
-
-export const dynamicParams = false;

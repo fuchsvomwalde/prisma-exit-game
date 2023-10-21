@@ -7,6 +7,8 @@ import getGameState from "./_utils/useGameState";
 import { serverTranslation } from "@/i18n";
 import messageLoader from "../_messages";
 
+export const dynamicParams = false;
+
 export default async function Game({
   params,
 }: {
@@ -90,8 +92,7 @@ export async function generateStaticParams({
   const games: Array<Game> = await getAllGames(params.locale);
 
   return games.map((game) => ({
+    locale: params.locale,
     gameSlug: game.slug,
   }));
 }
-
-export const dynamicParams = false;
