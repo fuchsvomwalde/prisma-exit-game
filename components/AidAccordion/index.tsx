@@ -5,23 +5,23 @@ import { useReducer, useState } from "react";
 import AnimatedType from "../AnimatedType";
 
 interface AidAccordionProps {
-  aids: Array<Aid>;
+  helps: Array<Aid>;
 }
 
-export default function AidAccordion({ aids }: AidAccordionProps) {
+export default function AidAccordion({ helps }: AidAccordionProps) {
   const [expandedIndex, setExpandedIndex] = useState(-1);
   const [revealedState, dispatch] = useReducer(
     (
       state: {
-        [aidIndex: string]: {
+        [helpIndex: string]: {
           [messageIndex: string]: boolean;
         };
       },
-      action: { aidIndex: string; messageIndex: string }
+      action: { helpIndex: string; messageIndex: string }
     ) => ({
       ...state,
-      [action.aidIndex]: {
-        ...state[action.aidIndex],
+      [action.helpIndex]: {
+        ...state[action.helpIndex],
         [action.messageIndex]: true,
       },
     }),
@@ -30,15 +30,15 @@ export default function AidAccordion({ aids }: AidAccordionProps) {
 
   return (
     <div id="accordion">
-      {aids?.map((aid, aidIndex) => {
-        const isFirst = aidIndex === 0;
-        const isLast = aidIndex === aids.length - 1;
-        const isExpanded = aidIndex === expandedIndex;
+      {helps?.map((help, helpIndex) => {
+        const isFirst = helpIndex === 0;
+        const isLast = helpIndex === helps.length - 1;
+        const isExpanded = helpIndex === expandedIndex;
         const isCollapsed = !isExpanded;
 
         return (
-          <div key={`aid-${aidIndex}`}>
-            <h2 id={`accordion-heading-${aidIndex}`}>
+          <div key={`help-${helpIndex}`}>
+            <h2 id={`accordion-heading-${helpIndex}`}>
               <button
                 type="button"
                 className={`flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border ${
@@ -48,14 +48,14 @@ export default function AidAccordion({ aids }: AidAccordionProps) {
                 } ${
                   isLast && isCollapsed ? "rounded-b-xl" : ""
                 } focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800`}
-                data-accordion-target={`#accordion-body-${aidIndex}`}
+                data-accordion-target={`#accordion-body-${helpIndex}`}
                 aria-expanded="true"
-                aria-controls={`accordion-body-${aidIndex}`}
+                aria-controls={`accordion-body-${helpIndex}`}
                 onClick={() =>
-                  setExpandedIndex(expandedIndex === aidIndex ? -1 : aidIndex)
+                  setExpandedIndex(expandedIndex === helpIndex ? -1 : helpIndex)
                 }
               >
-                <span>{aid.title}</span>
+                <span>{help.title}</span>
                 <svg
                   data-accordion-icon
                   className={`w-3 h-3 ${
@@ -77,25 +77,26 @@ export default function AidAccordion({ aids }: AidAccordionProps) {
               </button>
             </h2>
             <div
-              id={`accordion-body-${aidIndex}`}
+              id={`accordion-body-${helpIndex}`}
               className={isCollapsed ? "hidden text-left" : "text-left"}
-              aria-labelledby={`accordion-heading-${aidIndex}`}
+              aria-labelledby={`accordion-heading-${helpIndex}`}
             >
               <div
                 className={`p-5 border ${
                   isLast && isExpanded ? "rounded-b-xl" : ""
                 } border-gray-200 dark:border-gray-700 dark:bg-gray-900`}
               >
-                {aid?.messages?.map((message, messageIndex) => {
+                {help?.messages?.map((message, messageIndex) => {
                   const isRevealed =
-                    revealedState?.[aidIndex]?.[messageIndex] === true;
+                    revealedState?.[helpIndex]?.[messageIndex] === true;
                   const isNextMessageRevealed =
-                    revealedState?.[aidIndex]?.[messageIndex + 1] === true;
+                    revealedState?.[helpIndex]?.[messageIndex + 1] === true;
                   const isFirstMessage = messageIndex === 0;
-                  const isOnlyMessage = aid.messages.length === 1;
-                  const hasNextMessage = messageIndex < aid.messages.length - 1;
+                  const isOnlyMessage = help.messages.length === 1;
+                  const hasNextMessage =
+                    messageIndex < help.messages.length - 1;
                   const nextMessageIsLast =
-                    messageIndex === aid.messages.length - 2;
+                    messageIndex === help.messages.length - 2;
 
                   function getButtonText() {
                     if (isOnlyMessage && !isRevealed) return "Show Clue";
@@ -114,7 +115,7 @@ export default function AidAccordion({ aids }: AidAccordionProps) {
 
                   return (
                     <div
-                      key={`aid-${aidIndex}-message-${messageIndex}`}
+                      key={`help-${helpIndex}-message-${messageIndex}`}
                       className="mb-2 text-gray-500 dark:text-gray-400 flex flex-col gap-2 items-start"
                     >
                       {isRevealed && (
@@ -128,7 +129,7 @@ export default function AidAccordion({ aids }: AidAccordionProps) {
                           className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
                           onClick={() =>
                             dispatch({
-                              aidIndex: `${aidIndex}`,
+                              helpIndex: `${helpIndex}`,
                               messageIndex:
                                 isFirstMessage && !isRevealed
                                   ? `${messageIndex}`

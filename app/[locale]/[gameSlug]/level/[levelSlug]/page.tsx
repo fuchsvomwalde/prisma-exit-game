@@ -83,14 +83,14 @@ export default async function GameLevel({
 
         <div className="lg:max-w-5xl mb-8 grid text-center w-full lg:w-full lg:grid-cols-4 lg:text-left">
           <NavTile
-            href={`/${params.gameSlug}/level/${params.levelSlug}/mystic-hints`}
+            href={`/${params.gameSlug}/level/${params.levelSlug}/riddles`}
             title={t("level.navigation.clues.title")}
             subline={t("level.navigation.clues.description")}
           />
           <NavTile
-            href={`/${params.gameSlug}/level/${params.levelSlug}/ancient-aid`}
-            title={t("level.navigation.aids.title")}
-            subline={t("level.navigation.aids.description")}
+            href={`/${params.gameSlug}/level/${params.levelSlug}/help`}
+            title={t("level.navigation.helps.title")}
+            subline={t("level.navigation.helps.description")}
           />
         </div>
       </main>

@@ -28,7 +28,7 @@
         "description": "Go back to main menu."
       }
     },
-    "content": "Welcome to Prisma. This is an exit game based on a true story. If you want to know all the secrets about the background, you have to pass all the levels and enter the final solution word. The rules of the game are simple. You have to complete all the levels in the shortest possible time and enter the correct solution word for each level on this website to succeed. The website will tell you if the solution word was right or wrong.\n\nIn your room there is a suitcase, in this suitcase there are more boxes, each box represents another level (marked by a black and white number). You can open the box with the next level only after solving the previous level. \n1. CARDS: In each box (or level) you will find cards marked with red letters. For each level there is at least one card with a QR code that directs you to further clues and help on the web. \n2. AIDS: From level to level you also collect aids. Not all cards and aids are always needed directly, some you need to save for later, expect the unexpected.\n3. HELP: If you need help or tips and the hints on cards and on the web are not enough, the game master is available to answer your questions.\n4. IMPORTANT: In addition to the tools provided, you will also need a working smartphone with an internet connection (and maybe more equipment). It may also be helpful to have a pen and paper ready to take notes.\n5. THE GAME BEGINS: What are you waiting for? Start the game and complete all the levels to crack the secret behind Prisma!"
+    "content": "Welcome to Prisma. This is an exit game based on a true story. If you want to know all the secrets about the background, you have to pass all the levels and enter the final solution word. The rules of the game are simple. You must complete all levels in the shortest possible time and enter the correct solution word for each level on this website to succeed. The website will tell you whether the solution word was right or wrong.\n\nIn your room there is a suitcase, in this suitcase there are more boxes, each box represents a different level (marked by a black and white number). You can only open the box with the next level after you have solved the previous level. \n\n1. CARDS: In each box (or level) you will find cards marked with letters on a red background. The red stickers have no significance for the course of the game and only serve to keep things tidy. There is at least one card with a QR code for each level. This will take you to other puzzles on the web, but you can always access these puzzles via the website of the current level. \n\n2. aids: Each puzzle starts with an introductory text and ends with a text. These texts never contain important clues, but are primarily for suspense and entertainment. From level to level you also collect aids. Not all cards and aids are always needed immediately, some you have to save for later, expect the unexpected.\n\n3. HELP: If you need help or tips and the hints on the cards and on the web are not enough, detailed help is available on the website of the current level.\n\n4. IMPORTANT: In addition to the tools provided, you will also need a working smartphone with an internet connection (and perhaps more equipment). It might also be helpful to have pen and paper ready to take notes.\n\n5. THE GAME BEGINS: What are you waiting for? Start the game and complete all levels to unravel the mystery behind Prisma!"
   },
   "level": {
     "submit": "Submit",
@@ -38,15 +38,15 @@
         "description": "Go back to main menu."
       },
       "backToLevel": {
-        "title": "Return to the Nexus",
+        "title": "Back to password entry",
         "description": "Step back into the realm of choices. Enter the sacred words and determine your destiny."
       },
       "clues": {
-        "title": "Unearth Clues",
+        "title": "To the Riddles",
         "description": "Dive into the world of mysteries and discover the secrets needed to progress."
       },
-      "aids": {
-        "title": "Seek Guidance",
+      "helps": {
+        "title": "Seek Help",
         "description": "Lost in the enigma? Gain insights, but aware, spoilers ahead."
       },
       "retry": {
@@ -63,7 +63,7 @@
       "subtitle": "The Enchanted Empty",
       "description": "You have ventured into an uncharted domain where riddles and hints are yet to be born. Tread lightly, and perhaps the mysteries of this realm will unfold before you in due time."
     },
-    "aidInfo": {
+    "helpInfo": {
       "title": "Info",
       "subtitle": "The Void of Silence",
       "description": "In this ancient space, guidance is veiled in shadows. For now, trust your instincts and navigate with the wisdom you already possess. The cosmos will unveil its guidance when the time is right."

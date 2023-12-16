@@ -18,7 +18,9 @@ export async function GET(
   }
 ) {
   const { searchParams } = new URL(request.url);
-  const passcode = searchParams.get(FORM_DATA_LEVEL_SUBMIT_PASSCODE);
+  const passcode = `${searchParams.get(FORM_DATA_LEVEL_SUBMIT_PASSCODE)}`
+    ?.trim()
+    ?.toLowerCase();
 
   const currentLevel = await getLevelBySlug(
     params.gameSlug,
@@ -26,7 +28,11 @@ export async function GET(
     params.locale
   );
 
-  if (`${passcode}`?.trim()?.toLowerCase() === currentLevel?.solution) {
+  if (
+    Array.isArray(currentLevel?.solution)
+      ? currentLevel?.solution.some((solution) => passcode === solution)
+      : passcode === currentLevel?.solution
+  ) {
     const response = NextResponse.redirect(
       new URL(
         `/${params.gameSlug}/level/${params.levelSlug}/result`,

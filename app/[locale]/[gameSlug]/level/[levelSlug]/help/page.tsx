@@ -18,7 +18,7 @@ export default async function GameLevelAncientAid({
     params.levelSlug,
     params.locale
   );
-  const aids = level?.aids ?? [];
+  const helps = level?.helps ?? [];
 
   return (
     <Terminal variant="default">
@@ -33,7 +33,7 @@ export default async function GameLevelAncientAid({
         </div>
 
         <div className="lg:max-w-5xl mb-8 text-center w-full lg:w-full lg:text-left">
-          {aids?.length === 0 && (
+          {helps?.length === 0 && (
             <div
               className="flex mb-8 items-center p-4 text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
               role="alert"
@@ -47,17 +47,17 @@ export default async function GameLevelAncientAid({
               >
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
               </svg>
-              <span className="sr-only">{t("level.aidInfo.title")}</span>
+              <span className="sr-only">{t("level.helpInfo.title")}</span>
               <div>
                 <span className="font-medium">
-                  {t("level.aidInfo.subtitle")}
+                  {t("level.helpInfo.subtitle")}
                 </span>{" "}
-                {t("level.aidInfo.description")}
+                {t("level.helpInfo.description")}
               </div>
             </div>
           )}
 
-          {aids?.length > 0 && (
+          {helps?.length > 0 && (
             <div
               className="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800 text-shadow-lg shadow-yellow-800"
               role="alert"
@@ -81,7 +81,7 @@ export default async function GameLevelAncientAid({
             </div>
           )}
 
-          <AidAccordion aids={aids} />
+          <AidAccordion helps={helps} />
         </div>
       </main>
     </Terminal>

@@ -1,11 +1,11 @@
 import { StaticImageData } from "next/image";
 import "server-only";
 
-export type SingleLanguage = string;
-export interface MultiLanguage {
-  de: string;
-  en: string;
-  [key: string]: string;
+export type SingleLanguage<T = string> = T;
+export interface MultiLanguage<T = string> {
+  de: T;
+  en: T;
+  [key: string]: T;
 }
 export interface Clue<
   T extends SingleLanguage | MultiLanguage = SingleLanguage
@@ -56,10 +56,12 @@ export interface Level<
   failure_title?: T;
   failure_message: T;
   solution_prompt: T;
-  solution: T;
+  solution: T extends SingleLanguage
+    ? SingleLanguage<string | string[]>
+    : MultiLanguage<string | string[]>;
   next_slug?: string;
   clues?: Array<Clue<T>>;
-  aids?: Array<Aid<T>>;
+  helps?: Array<Aid<T>>;
 }
 
 export interface Link {
@@ -92,15 +94,15 @@ export const games: Array<Game<MultiLanguage>> = [
     links: [
       {
         slug: "8170",
-        href: "/cl4551c/level/101/mystic-hints",
+        href: "/cl4551c/level/101/riddles",
       },
       {
         slug: "r00m",
-        href: "/cl4551c/level/r00m/mystic-hints",
+        href: "/cl4551c/level/r00m/riddles",
       },
       {
         slug: "h1d3",
-        href: "/cl4551c/level/chemistry/mystic-hints",
+        href: "/cl4551c/level/chemistry/riddles",
       },
       {
         slug: "57g0",
@@ -109,11 +111,11 @@ export const games: Array<Game<MultiLanguage>> = [
       },
       {
         slug: "rvr5",
-        href: "/cl4551c/level/noctual-animal/mystic-hints",
+        href: "/cl4551c/level/noctual-animal/riddles",
       },
       {
         slug: "c0d3",
-        href: "/cl4551c/level/pr15m4/mystic-hints",
+        href: "/cl4551c/level/pr15m4/riddles",
       },
     ],
     levels: [
@@ -146,7 +148,7 @@ export const games: Array<Game<MultiLanguage>> = [
         },
         solution: { en: "hello world", de: "hello world" },
         next_slug: "101",
-        aids: [
+        helps: [
           {
             title: {
               en: "The missing puzzle piece",
@@ -228,19 +230,31 @@ export const games: Array<Game<MultiLanguage>> = [
           de: "Geheimcode eingeben",
         },
         solution: {
-          en: "101011001",
-          de: "101011001",
+          en: ["101011001", "0101011001", "10010101", "100101010"],
+          de: ["101011001", "0101011001", "10010101", "100101010"],
         },
         next_slug: "r00m",
         clues: [
           {
             title: {
-              en: "Whispers of the Dual Realm",
-              de: "Flüstern der dualen Welt",
+              de: "Das Geheimnis des Autostereogramms",
+              en: "The Secret of the Autostereogram",
             },
             text: {
-              en: "In a world where the ancient pulse beats twice, discover the rhythm that dances between two steps. Can you decipher the song of zeros and ones?",
-              de: "In einer Welt, in der der alte Puls zweimal schlägt, entdecke den Rhythmus, der zwischen zwei Schritten tanzt. Kannst du das Lied aus Nullen und Einsen entschlüsseln?",
+              de: "In diesem Rätsel tauchen wir ein in die Welt der Autostereogramme – einzigartige Bilder, die ein verstecktes 3D-Bild in sich tragen. Doch nicht jeder kann dieses Geheimnis auf Anhieb enthüllen. Manche mögen es sofort sehen, für andere ist es eine Herausforderung, die Geduld und Übung erfordert.\n\nDeine Aufgabe:\n\n1. Finde das Autostereogramm: In diesem Raum findest du ein scheinbar chaotisches Muster. Es ist ein Autostereogramm. Schau genau hin!\n\n2. Lerne, es zu lesen: Um das verborgene Bild zu sehen, musst du deine Augen entspannen. Fixiere einen Punkt hinter dem Bild, als ob du durch das Bild hindurchschauen würdest. Es kann helfen, das Bild langsam zu nähern und zu entfernen, bis das verborgene Bild erscheint.\n\n3. Geduld ist der Schlüssel: Erwarte nicht sofort Erfolg. Manche benötigen nur wenige Sekunden, andere mehrere Minuten. Gib nicht auf!\n\n4. Finde die versteckte Botschaft: Sobald du das 3D-Bild erkennst, findest du darin eine Botschaft oder ein Symbol. Dieses wird dir den nächsten Hinweis für dein Abenteuer geben.\n\nHinweis: Nicht jeder kann Autostereogramme sofort sehen. Wenn du Schwierigkeiten hast, nimm dir Zeit und versuche es später erneut. Denke daran, dass das Auge und der Geist manchmal etwas Übung benötigen, um das Verborgene zu enthüllen.\n\n\n\nViel Erfolg!",
+              en: "In this puzzle we dive into the world of autostereograms - unique images that carry a hidden 3D image within them. But not everyone can reveal this secret at first sight. Some may see it immediately, for others it is a challenge that requires patience and practice.\n\nYour task:\n\n1. Find the autostereogram: In this room you will find an apparently chaotic pattern. It is an autostereogram. Look closely!\n\n2. Learn to read it: To see the hidden image, you have to relax your eyes. Fix a point behind the image as if you were looking through the image. It can help to slowly approach and remove the image until the hidden image appears.\n\n3. Patience is the key: Don't expect success immediately. Some need only a few seconds, others several minutes. Don't give up!\n\n4. Find the hidden message: Once you recognize the 3D image, you will find a message or symbol in it. This will give you the next clue for your adventure.\n\nNote: Not everyone can see autostereograms immediately. If you have difficulties, take your time and try again later. Remember that the eye and the mind sometimes need some practice to reveal the hidden.\n\n\n\nGood luck!",
+            },
+          },
+          {
+            title: {
+              en: "Mysterious pattern",
+              de: "Geheimnisvolles Muster",
+            },
+            image: {
+              download: "unknown.png",
+              src: "/cl4551c/unknown.png",
+              width: 1600,
+              height: 1200,
             },
           },
           {
@@ -254,8 +268,17 @@ export const games: Array<Game<MultiLanguage>> = [
             },
             link: "https://www.wdrmaus.de/filme/sachgeschichten/bis_1023_zaehlen.php5",
           },
+          {
+            title: { en: "Strange Hands", de: "Seltsame Hände" },
+            image: {
+              download: "hands.png",
+              src: "/cl4551c/hands.jpg",
+              width: 500,
+              height: 667,
+            },
+          },
         ],
-        aids: [
+        helps: [
           {
             title: {
               en: "The card with the mysterious pattern",
@@ -376,6 +399,16 @@ Wird der Schlüssel sein, der lässt dich hinein.`,
         clues: [
           {
             title: {
+              de: "Die Frostflamme",
+              en: "The Frostflame",
+            },
+            text: {
+              de: "In den fernsten Landen, wo der Winter herrscht und die Nacht ewig zu sein scheint, liegt das Geheimnis verborgen. Wie ein Drache, der Feuer und Eis in sich vereint, so musst du Gegensätze zusammenführen. Suche nach der Kälte, die nicht friert, und dem Licht, das nicht erhellt. Wie ein Schattenwolf im Schnee, so verbirgt sich die Antwort in der Stille. Nur wer die Sprache des Frostes und des Feuers spricht, wird den Weg zum nächsten Schlüssel finden. Erinnere dich: In der Dunkelheit der längsten Nacht offenbaren sich die wahren Sterne. Sei wachsam, sei klug, und lass dich nicht von den Flüstern des Nordens täuschen.",
+              en: "In the farthest lands, where winter reigns and night seems eternal, lies the hidden secret. Like a dragon that unites fire and ice, you must bring opposites together. Seek the cold that does not freeze, and the light that does not illuminate. Like a shadow wolf in the snow, the answer hides in silence. Only those who speak the language of frost and fire will find the way to the next key. Remember: In the darkness of the longest night, the true stars reveal themselves. Be vigilant, be wise, and do not be deceived by the whispers of the North.",
+            },
+          },
+          {
+            title: {
               en: "Ready to enter the r00m?",
               de: "Bereit, den Raum zu betreten?",
             },
@@ -403,7 +436,7 @@ Wird der Schlüssel sein, der lässt dich hinein.`,
             link: "https://youtu.be/aekfPU0SwNw",
           },
         ],
-        aids: [
+        helps: [
           {
             title: {
               en: "The Video",
@@ -423,26 +456,6 @@ Wird der Schlüssel sein, der lässt dich hinein.`,
             },
             messages: [
               {
-                en: `Not all is visible to the naked eye.`,
-                de: "Nicht alles ist mit dem bloßen Auge sichtbar.",
-              },
-              {
-                en: `The hidden message is somewhere on the card.`,
-                de: "Die versteckte Botschaft befindet sich irgendwo auf der Karte.",
-              },
-              {
-                en: `Let the ultraviolet unveil what's hidden in plain sight.`,
-                de: "Lasst das Ultraviolett enthüllen, was im Verborgenen liegt.",
-              },
-            ],
-          },
-          {
-            title: {
-              en: "The card with red framed name",
-              de: "Die Karte mit dem rot umrahmten Namen",
-            },
-            messages: [
-              {
                 en: `The frost has a tale to tell. Allow the cold to whisper its secrets.`,
                 de: `Der Frost hat eine Geschichte zu erzählen. Erlaube der Kälte, ihre Geheimnisse zu flüstern.`,
               },
@@ -453,6 +466,26 @@ Wird der Schlüssel sein, der lässt dich hinein.`,
               {
                 en: `Put the card in your damn freezer and wait 1 minute.`,
                 de: `Legt die Karte in euer verdammtes Gefrierfach und wartet 1 Minute.`,
+              },
+            ],
+          },
+          {
+            title: {
+              en: "The card with red framed name",
+              de: "Die Karte mit dem rot umrahmten Namen",
+            },
+            messages: [
+              {
+                en: `Not all is visible to the naked eye.`,
+                de: "Nicht alles ist mit dem bloßen Auge sichtbar.",
+              },
+              {
+                en: `The hidden message is somewhere on the card.`,
+                de: "Die versteckte Botschaft befindet sich irgendwo auf der Karte.",
+              },
+              {
+                en: `Let the ultraviolet unveil what's hidden in plain sight.`,
+                de: "Lasst das Ultraviolett enthüllen, was im Verborgenen liegt.",
               },
             ],
           },
@@ -499,10 +532,6 @@ Wird der Schlüssel sein, der lässt dich hinein.`,
             },
           },
           {
-            title: { en: "The picture in the picture", de: "Das Bild im Bild" },
-            link: "https://towardsdatascience.com/steganography-hiding-an-image-inside-another-77ca66b2acb1",
-          },
-          {
             title: { en: "Do you know me?", de: "Kennt ihr mich?" },
             description: {
               en: "I'm a talented and passionated creator of stories.",
@@ -523,7 +552,7 @@ Wird der Schlüssel sein, der lässt dich hinein.`,
             link: "/cl4551c/go/57g0",
           },
         ],
-        aids: [
+        helps: [
           {
             title: {
               en: "The 'secret.png' image of Prisma",
@@ -617,8 +646,18 @@ Wird der Schlüssel sein, der lässt dich hinein.`,
               type: "audio/mpeg",
             },
           },
+          {
+            title: {
+              de: "Der Ruf des nächtlichen Jägers",
+              en: "The Call of the Night Hunter",
+            },
+            text: {
+              de: "Tief im Gewirr der modernen Labyrinthe, wo Zahlen und Zeichen den Pfad weisen, verbirgt sich das nächste Geheimnis. Suche nach einem Ort und betrachte diesen aus der weiten Ferne des Himmels. Sobald du diesen Ort gefunden hast findest du das gesuchten Zeichen. Dessen Spitzname, geflüstert in den Gassen und auf den Dächern, wird dir den Schlüssel zum nächsten Rätsel enthüllen. Denke daran: Nicht immer ist der offensichtliche Weg der richtige. Folge den Zeichen, aber vertraue auch deiner Intuition.",
+              en: "Deep in the maze of modern labyrinths, where numbers and signs point the way, the next secret is hidden. Search for a place and observe it from the far distance of the sky. Once you have found this place, you will find the sign you are looking for. Its nickname, whispered in the alleyways and on the rooftops, will reveal the key to the next riddle. Remember: the obvious path is not always the right one. Follow the signs, but also trust your intuition.",
+            },
+          },
         ],
-        aids: [
+        helps: [
           {
             title: { en: "The audio file", de: "Die Audiodatei" },
             messages: [
@@ -763,20 +802,16 @@ Wird der Schlüssel sein, der lässt dich hinein.`,
             },
           },
         ],
-        aids: [
+        helps: [
           {
             title: {
-              en: "The locked box with the number 6",
-              de: "Die verschlossene Box mit der Zahl 6",
+              en: "The key",
+              de: "Der Schlüssel",
             },
             messages: [
               {
-                en: "The key is inside the red cube of level 5.",
-                de: "Der Schlüssel ist im roten Würfel von Level 5.",
-              },
-              {
-                en: "Yes you have to literally open the cube to get the key.",
-                de: "Ja, ihr müsst den Würfel buchstäblich öffnen, um an den Schlüssel zu gelangen.",
+                de: "Der Schlüssel öffnet den Koffer von Level 6.",
+                en: "The key opens the box of level 6.",
               },
             ],
           },
@@ -784,8 +819,12 @@ Wird der Schlüssel sein, der lässt dich hinein.`,
             title: { en: "The cryptex", de: "Die Cryptex" },
             messages: [
               {
-                en: "The passwort of the cryptex is writton on the puzzle of level 1.",
                 de: "Das Passwort der Cryptex ist auf dem Puzzle von Level 1 geschrieben.",
+                en: "The passwort of the cryptex is writton on the puzzle of level 1.",
+              },
+              {
+                de: "Das Passwort der Cryptex ist ebenso auf den roten Hinweismarkierungen versteckt, da die Hinweismarkierungen P, R, I, S, M und A die Reihenfolge der Buchstaben im Lösungswort der Kryptex versteckt haben. Diese wird sichtbar wenn man mit der UV-Lampe auf die Hinweismarkierungen leuchtet.",
+                en: "The passwort of the cryptex is also hidden on the red clue markers, as the clue markers P, R, I, S, M and A have the order of the letters in the solution word of the cryptex hidden. This becomes visible when you shine the UV lamp on the clue markers.",
               },
             ],
           },

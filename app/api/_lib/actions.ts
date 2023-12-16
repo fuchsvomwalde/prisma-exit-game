@@ -70,10 +70,10 @@ function _transformClueToSingleLocale(
 }
 
 function _transformAidToSingleLocale(
-  aid: Aid<MultiLanguage>,
+  help: Aid<MultiLanguage>,
   locale: string
 ): Aid<SingleLanguage> {
-  const { title, messages, ...rest } = aid;
+  const { title, messages, ...rest } = help;
 
   return {
     ...rest,
@@ -95,7 +95,7 @@ function _transformLevelToSingleLocale(
     failure_message,
     solution_prompt,
     solution,
-    aids,
+    helps,
     clues,
     ...rest
   } = link;
@@ -110,7 +110,7 @@ function _transformLevelToSingleLocale(
     failure_message: failure_message[locale],
     solution_prompt: solution_prompt[locale],
     solution: solution[locale],
-    aids: aids?.map((aid) => _transformAidToSingleLocale(aid, locale)),
+    helps: helps?.map((help) => _transformAidToSingleLocale(help, locale)),
     clues: clues?.map((clue) => _transformClueToSingleLocale(clue, locale)),
   };
 }
